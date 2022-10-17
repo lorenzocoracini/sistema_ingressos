@@ -3,12 +3,13 @@ from abc import ABC, abstractmethod
 
 class Usuario(ABC):
     @abstractmethod
-    def __init__(self, nome: str, cpf: str, nascimento: str, email: str, celular: int):
+    def __init__(self, nome: str, cpf: str, nascimento: str, email: str, celular: int, saldo: float):
         self.__nome = nome
         self.__cpf = cpf
         self.__nascimento = nascimento
         self.__email = email
         self.__celular = celular
+        self.__saldo = saldo
 
     @property
     def nome(self):
@@ -49,3 +50,11 @@ class Usuario(ABC):
     @celular.setter
     def celular(self, celular):
         self.__celular = celular
+
+    @property
+    def saldo(self):
+        return self.__saldo
+
+    @saldo.setter
+    def saldo(self, saldo):
+        self.__saldo = saldo
