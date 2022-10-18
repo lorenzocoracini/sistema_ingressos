@@ -14,3 +14,4 @@ class Comprador(Usuario):
     @property
     def eventos_favoritos(self):
         return self.__eventos_favoritos
+

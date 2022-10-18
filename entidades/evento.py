@@ -1,15 +1,16 @@
 from local import Local
 from datetime import datetime
 
-#https://www.programiz.com/python-programming/datetime
+
+# https://www.programiz.com/python-programming/datetime
 class Evento:
-    def __init__(self, codigo: int, data:datetime, nome: str, descricao: str, atracoes: [], ingressos: [],
+    def __init__(self, codigo: int, data: datetime, nome: str, descricao: str, atracao: str, ingressos: [],
                  depesas: float, local: Local):
         self.__codigo = codigo
         self.__data = data
         self.__nome = nome
         self.__descricao = descricao
-        self.__atracoes = []
+        self.__atracao = atracao
         self.__ingressos = ingressos
         self.__despesas = depesas
         self.__local = local
@@ -56,12 +57,13 @@ def descricao(self, nova_descricao):
 
 
 @property
-def atracoes(self):
-    return self.__atracoes
+def atracao(self):
+    return self.__atracao
 
-@atracoes.setter
-def atracoes(self, novas_atracoes):
-    self.__atracoes = novas_atracoes
+
+@atracao.setter
+def atracao(self, nova_atracao):
+    self.__atracao = nova_atracao
 
 
 @property

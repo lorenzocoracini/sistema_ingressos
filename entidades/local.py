@@ -1,5 +1,5 @@
 class Local:
-    def __init__(self, rua:str, bairro:str, cidade:str, cep:str, lotacao_maxima:int, aluguel:float):
+    def __init__(self, rua:str, bairro:str, cidade:str, cep:int, lotacao_maxima:int, aluguel:float):
         self.__rua = rua
         self.__bairro = bairro
         self.__cidade = cidade

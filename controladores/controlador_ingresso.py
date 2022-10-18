@@ -20,6 +20,10 @@ class ContraladorIngressos:
         except Exception:
             return None
 
+    def retorna_ingresso_pelo_codigo(self,codigo):
+        for ingresso in self.__ingressos:
+            if ingresso.codigo == codigo:
+                return ingresso
 
     def alterar_ingresso(self):
         pass
