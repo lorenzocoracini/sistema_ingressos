@@ -1,9 +1,9 @@
 from abc import ABC, abstractmethod
-
+from datetime import date
 
 class Usuario(ABC):
     @abstractmethod
-    def __init__(self, nome: str, cpf: str, nascimento: str, email: str, celular: int, saldo: float):
+    def __init__(self, nome: str, cpf: str, nascimento: date, email: str, celular: int, saldo: float):
         self.__nome = nome
         self.__cpf = cpf
         self.__nascimento = nascimento
