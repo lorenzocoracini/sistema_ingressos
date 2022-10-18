@@ -59,6 +59,10 @@ def descricao(self, nova_descricao):
 def atracoes(self):
     return self.__atracoes
 
+@atracoes.setter
+def atracoes(self, novas_atracoes):
+    self.__atracoes = novas_atracoes
+
 
 @property
 def ingressos(self):
