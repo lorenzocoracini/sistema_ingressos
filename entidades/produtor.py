@@ -1,8 +1,8 @@
 from usuario import Usuario
-
+from datetime import date
 
 class Produtor(Usuario):
-    def __init__(self, nome: str, cpf: str, nascimento: str, email: str, celular: int, saldo: float):
+    def __init__(self, nome: str, cpf: str, nascimento: date, email: str, celular: int, saldo: float):
         super().__init__(nome, cpf, nascimento, email, celular, saldo)
         self.__historico_vendas = []
         self.__historico_eventos = []
