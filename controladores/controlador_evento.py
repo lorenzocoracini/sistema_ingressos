@@ -1,5 +1,4 @@
 from entidades.evento import Evento
-from time import *
 from datetime import *
 
 
@@ -7,10 +6,10 @@ class ControladorEvento:
     def __init__(self):
         self.__eventos = []
 
-    def adicionar_evento(self, codigo: int, data: date, nome:str, horario: time(), descricao: str, atracoes: [], ingressos: [],
+    def adicionar_evento(self, codigo: int, data: date, nome: str, descricao: str, atracoes: [], ingressos: [],
                          despesas: float):
 
-        evento = Evento(codigo, data, nome, horario, descricao, atracoes, ingressos, despesas)
+        evento = Evento(codigo, data, nome, descricao, atracoes, ingressos, despesas)
 
         try:
             for e in self.__eventos:
