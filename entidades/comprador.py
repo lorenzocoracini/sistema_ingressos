@@ -1,5 +1,6 @@
-from usuario import Usuario
+from entidades.usuario import Usuario
 from datetime import date
+
 
 class Comprador(Usuario):
     def __init__(self, nome: str, cpf: int, nascimento: date, email: str, celular: int, saldo: float):
@@ -14,4 +15,3 @@ class Comprador(Usuario):
     @property
     def eventos_favoritos(self):
         return self.__eventos_favoritos
-

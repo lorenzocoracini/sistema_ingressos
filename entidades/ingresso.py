@@ -1,4 +1,4 @@
-from comprador import Comprador
+from entidades.comprador import Comprador
 
 
 class Ingresso:

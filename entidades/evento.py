@@ -1,4 +1,4 @@
-from local import Local
+from entidades.local import Local
 from datetime import datetime
 
 

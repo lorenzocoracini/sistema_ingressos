@@ -1,6 +1,6 @@
 import sys
 
-from controlador_comprador import ControladorComprador
+from controladores.controlador_comprador import ControladorComprador
 from controladores.controlador_evento import ControladorEvento
 from controladores.controlador_ingresso import ContraladorIngressos
 from controladores.controlador_produtor import ControladorProdutor
@@ -32,4 +32,9 @@ class ControladorPrincipal:
         sys.exit()
 
     def inicia(self):
-        pass
+        opcoes = {1: self.inicia_comprador, 2: self.inicia_produtor(), 0: self.finaliza}
+
+        while True:
+            opcao = self.__tela_principal.mostra_tela_principal()
+            metodo_escolihido = opcoes[opcao]
+            metodo_escolihido()
