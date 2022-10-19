@@ -23,16 +23,16 @@ class ControladorPrincipal:
         pass
 
     def inicia_comprador(self):
-        pass
+        print('Inicia_comprador')
 
     def inicia_produtor(self):
-        pass
+        print('Inicia_produtor')
 
     def finaliza(self):
         sys.exit()
 
     def inicia(self):
-        opcoes = {1: self.inicia_comprador, 2: self.inicia_produtor(), 0: self.finaliza}
+        opcoes = {1: self.inicia_comprador, 2: self.inicia_produtor, 0: self.finaliza}
 
         while True:
             opcao = self.__tela_principal.mostra_tela_principal()
