@@ -4,13 +4,13 @@ from datetime import date
 
 class Usuario(ABC):
     @abstractmethod
-    def __init__(self, nome: str, cpf: int, nascimento: date, email: str, celular: int, saldo: float):
+    def __init__(self, nome: str, cpf: int, nascimento: date, email: str, celular: int, senha: str):
         self.__nome = nome
         self.__cpf = cpf
         self.__nascimento = nascimento
         self.__email = email
         self.__celular = celular
-        self.__saldo = saldo
+        self.__senha = senha
 
     @property
     def nome(self):
@@ -53,9 +53,9 @@ class Usuario(ABC):
         self.__celular = celular
 
     @property
-    def saldo(self):
-        return self.__saldo
+    def senha(self):
+        return self.__senha
 
-    @saldo.setter
-    def saldo(self, saldo):
-        self.__saldo = saldo
+    @senha.setter
+    def senha(self, senha):
+        self.__senha = senha

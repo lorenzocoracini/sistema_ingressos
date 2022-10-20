@@ -3,8 +3,8 @@ from datetime import date
 
 
 class Comprador(Usuario):
-    def __init__(self, nome: str, cpf: int, nascimento: date, email: str, celular: int, saldo: float):
-        super().__init__(nome, cpf, nascimento, email, celular, saldo)
+    def __init__(self, nome: str, cpf: int, nascimento: date, email: str, celular: int, senha: str):
+        super().__init__(nome, cpf, nascimento, email, celular, senha)
         self.__historico_compras = []
         self.__eventos_favoritos = []
 
