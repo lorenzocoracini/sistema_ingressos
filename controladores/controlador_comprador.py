@@ -6,6 +6,17 @@ class ControladorComprador:
         self.__tela_comprador = TelaComprador()
         self.__compradores = []
 
+    def mostra_tela_opcoes(self):
+        opcoes = {1: self.__tela_comprador.mostra_tela_login_comprador,
+                  2: self.__tela_comprador.mostra_tela_cadastro_comprador}
+
+
+        opcao = self.__tela_comprador.mostra_tela_comprador()
+        metodo_escolihido = opcoes[opcao]
+        metodo_escolihido()
+
+
+
     def adicionar_comprador(self):
         dados = self.__tela_comprador.mostra_tela_cadastro_comprador()
         comprador = Comprador(dados["nome_comprador"], dados["cpf_comprador"], dados["nascimento_comprador"],
