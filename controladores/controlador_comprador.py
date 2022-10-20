@@ -7,7 +7,7 @@ class ControladorComprador:
         self.__compradores = []
 
     def adicionar_comprador(self):
-        dados = self.__tela_comprador.pegar_dados()
+        dados = self.__tela_comprador.mostra_tela_cadastro_comprador()
         comprador = Comprador(dados["nome_comprador"], dados["cpf_comprador"], dados["nascimento_comprador"],
                               dados["email_comprador"], dados["celular_comprador"], 0)
         try:
@@ -16,6 +16,7 @@ class ControladorComprador:
                     raise SystemError
             else:
                 self.__compradores.append(comprador)
+                self.__tela_comprador.mostrar_opcoes_comprador()
         except SystemError:
             return None
 
@@ -30,3 +31,14 @@ class ControladorComprador:
 
     def comprar_ingresso(self):
         pass
+
+    def verificar_login(self):
+        dados_login = self.__tela_comprador.mostra_tela_login_comprador()
+        comprador_fazendo_login = None
+        for comprador in self.__compradores:
+                if comprador.cpf == dados_login["cpf_login_comprador"]:
+                    comprador_fazendo_login = comprador
+                if comprador_fazendo_login.senha == dados_login["senha_login_comprador"]:
+                    self.__tela_comprador.mostrar_opcoes_comprador()
+                else:
+                    self.__tela_comprador.teste_errado()
