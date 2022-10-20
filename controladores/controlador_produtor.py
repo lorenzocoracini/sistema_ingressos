@@ -1,5 +1,3 @@
-from entidades.produtor import Produtor
-
 class ControladorProdutor:
     def __init__(self):
         self.__produtores = []

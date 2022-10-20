@@ -36,7 +36,6 @@ class ControladorPrincipal:
             metodo_escolihido()
 
     def inicia_produtor(self):
-
         opcoes = {1: self.__tela_produtor.mostra_tela_login_produtor,
                   2: self.__tela_produtor.mostra_tela_cadastro_produtor}
 

@@ -26,11 +26,7 @@ class TelaProdutor:
         dados_login_produtor = {"cpf_login_produtor": self.__cpf_login, "senha_login_produtor": self.__senha_login}
         return dados_login_produtor
 
-    def mostra_opcoes(self):
-        pass
 
-    def pegar_dados(self):
-        pass
 
     def listar_dados_produtor(self):
         pass
