@@ -21,6 +21,10 @@ class TelaProdutor:
 
     def mostra_tela_login_produtor(self):
         print('login produtor')
+        self.__cpf_login = input("Digite seu CPF: ")
+        self.__senha_login = input("Digite sua senha: ")
+        dados_login_produtor = {"cpf_login_produtor": self.__cpf_login, "senha_login_produtor": self.__senha_login}
+        return dados_login_produtor
 
     def mostra_opcoes(self):
         pass

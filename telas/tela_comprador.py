@@ -20,11 +20,11 @@ class TelaComprador:
                 "email_comprador": self.__email, "celular_comprador": self.__celular}
 
     def mostra_tela_login_comprador(self):
-        print('login produtor')
+        print('login comprador')
         self.__cpf_login = input("Digite seu CPF: ")
         self.__senha_login = input("Digite sua senha: ")
-        dados_login = {"cpf_login_comprador": self.__cpf_login, "senha_login_comprador": self.__senha_login}
-        return dados_login
+        dados_login_comprador = {"cpf_login_comprador": self.__cpf_login, "senha_login_comprador": self.__senha_login}
+        return dados_login_comprador
 
     def mostrar_opcoes_comprador(self):
         print("Login efetuado com sucesso!")
