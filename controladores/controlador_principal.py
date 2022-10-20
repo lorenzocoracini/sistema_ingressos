@@ -13,8 +13,6 @@ class ControladorPrincipal:
 
     def __init__(self):
         self.__tela_principal = TelaPrincipal()
-        self.__tela_produtor = TelaProdutor()
-        self.__tela_comprador = TelaComprador()
         self.__controlador_evento = ControladorEvento()
         self.__controlador_ingressos = ContraladorIngressos()
         self.__controlador_comprador = ControladorComprador()
