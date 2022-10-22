@@ -26,6 +26,13 @@ class TelaProdutor:
         dados_login_produtor = {"cpf_login_produtor": self.__cpf_login, "senha_login_produtor": self.__senha_login}
         return dados_login_produtor
 
+    def mostra_tela_opcoes_pos_login(self):
+        print("Login efetuado com sucesso")
+        print("1 - Adicionar evento")
+        print("2 - Editar evento")
+        print("3 - Transferir ingresso")
+        opcao = int(input('ESCOLHA A OPÇÃO'))
+        return opcao
 
 
     def listar_dados_produtor(self):
