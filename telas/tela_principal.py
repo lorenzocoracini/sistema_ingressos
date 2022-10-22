@@ -2,7 +2,7 @@ class TelaPrincipal:
 
     def mostra_tela_principal(self):
         print('*' * 20)
-        print('LOGIN')
+        print('ESCOLHA SUA CATEGORIA')
         print('1 - COMPRADOR')
         print('2 - PRODUTOR')
         print('0 - SAIR')

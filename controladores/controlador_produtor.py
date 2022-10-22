@@ -40,3 +40,6 @@ class ControladorProdutor:
 
     def remover_evento_disponivel(self):
         pass
+
+    def excluir_conta(self):
+        pass
