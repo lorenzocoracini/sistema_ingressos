@@ -14,6 +14,17 @@ class ControladorProdutor:
         metodo_escolihido = opcoes[opcao]
         metodo_escolihido()
 
+    def verificar_login(self):
+        dados_login = self.__tela_produtor.mostra_tela_login_produtor()
+        produtor_fazendo_login = None
+        for produtor in self.__produtores:
+                if produtor.cpf == dados_login["cpf_login_produtor"]:
+                    produtor_fazendo_login = produtor
+                if produtor_fazendo_login.senha == dados_login["senha_login_produtor"]:
+                    self.__tela_produtor.mostra_tela_opcoes_pos_login()
+                else:
+                    self.__tela_produtor.deu_erro()
+
 
 
     def inclui_produtor(self):
