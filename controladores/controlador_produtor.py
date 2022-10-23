@@ -1,3 +1,4 @@
+from entidades.produtor import Produtor
 from telas.tela_produtor import TelaProdutor
 
 
@@ -6,16 +7,22 @@ class ControladorProdutor:
         self.__produtores = []
         self.__tela_produtor = TelaProdutor()
 
-    def mostra_tela_opcoes(self):
-        opcoes = {1: self.__tela_produtor.mostra_tela_login_produtor,
-                  2: self.__tela_produtor.mostra_tela_cadastro_produtor}
+    def inclui_produtor(self, nome, cpf, nascimento, email, celular, senha):
+        produtor = Produtor(nome, cpf, nascimento, email, celular, senha)
+        try:
+            for i in self.__produtores:
+                if produtor.cpf == i.cpf:
+                    raise SystemError
+            else:
+                self.__produtores.append(produtor)
+                self.__tela_produtor.mostrar_opcoes_produtor()
+        except SystemError:
+            self.__tela_produtor.usuario_ja_existe()
 
-        opcao = self.__tela_produtor.mostra_tela_produtor()
-        metodo_escolihido = opcoes[opcao]
-        metodo_escolihido()
-
-    def inclui_produtor(self):
-        pass
+    def retorna_produtor_pelo_cpf(self, cpf):
+        for produtor in self.__produtores:
+            if produtor.cpf == cpf:
+                return produtor
 
     def altera_produtor(self):
         pass
