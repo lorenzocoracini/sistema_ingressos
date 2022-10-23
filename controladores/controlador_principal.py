@@ -29,10 +29,15 @@ class ControladorPrincipal:
 
     def login(self):
         dados_login = self.__tela_principal.mostrar_tela_login()
-        if self.__controlador_comprador.retorna_comprador_pelo_cpf(dados_login["cpf"]):
-            pass
-        elif self.__controlador_produtor.retorna_produtor_pelo_cpf(dados_login["cpf"]):
-            pass
+        comprador = self.__controlador_comprador.retorna_comprador_e_senha_pelo_cpf(dados_login["cpf"])
+        produtor = self.__controlador_produtor.retorna_produtor_e_senha_pelo_cpf(dados_login["cpf"])
+        if comprador:
+            if dados_login["senha"] == comprador[1]:
+                self.__controlador_comprador.escolher_acao()
+        elif produtor:
+            if dados_login["senha"] == produtor[1]:
+                self.__controlador_produtor.escolher_acao()
+
 
     def finaliza(self):
         sys.exit()
