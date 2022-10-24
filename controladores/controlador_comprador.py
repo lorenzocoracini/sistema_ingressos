@@ -6,6 +6,7 @@ class ControladorComprador:
     def __init__(self):
         self.__tela_comprador = TelaComprador()
         self.__compradores = []
+        self.__tela_aberta = False
 
     def inclui_comprador(self, nome, cpf, nascimento, email, celular, senha):
         comprador = Comprador(nome, cpf, nascimento, email, celular, senha)
@@ -15,7 +16,7 @@ class ControladorComprador:
                     raise SystemError
             else:
                 self.__compradores.append(comprador)
-                self.__tela_comprador.mostrar_opcoes_comprador()
+                #fazer metodo acao realizada com sucesso
         except SystemError:
             self.__tela_comprador.usuario_ja_existe()
 
@@ -25,10 +26,15 @@ class ControladorComprador:
                 return [comprador, comprador.senha]
 
     def escolher_acao(self):
-        print("login efetuado com sucesso")
+        self.__tela_aberta = True
+        opcoes = {1:self.ver_meus_ingressos, 2: self.ver_eventos_disponiveis, 3: self.favoritar_evento,
+                  4: self.transferir_ingresso, 5: self.alterar_dados_comprador, 6: self.excluir_conta,
+                  7: self.sair_da_conta}
+        while self.__tela_aberta:
+            opcao = self.__tela_comprador.mostrar_opcoes_comprador()
+            opcoes[opcao]()
 
-
-    def alterar_comprador(self):
+    def alterar_dados_comprador(self, dado_a_ser_alterado):
         pass
 
     def excluir_comprador(self):
@@ -37,8 +43,20 @@ class ControladorComprador:
     def listar_compradores(self):
         pass
 
-    def transferir_ingresso(self):
+    def ver_meus_ingressos(self):
         pass
+
+    def ver_eventos_disponiveis(self):
+        pass
+
+    def favoritar_evento(self):
+        pass
+
+    def transferir_ingresso(self, cpf_para_transferir):
+        pass
+
+    def sair_da_conta(self):
+        self.__tela_aberta = False
 
     def excluir_conta(self):
         pass

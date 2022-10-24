@@ -7,6 +7,7 @@ class Comprador(Usuario):
         super().__init__(nome, cpf, nascimento, email, celular, senha)
         self.__historico_compras = []
         self.__eventos_favoritos = []
+        self.__meus_ingressos = []
 
     @property
     def historico_compras(self):
@@ -15,3 +16,7 @@ class Comprador(Usuario):
     @property
     def eventos_favoritos(self):
         return self.__eventos_favoritos
+
+    @property
+    def meus_ingressos(self):
+        return self.__meus_ingressos

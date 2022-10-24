@@ -5,7 +5,7 @@ from datetime import datetime
 # https://www.programiz.com/python-programming/datetime
 class Evento:
     def __init__(self, codigo: int, data: datetime, nome: str, descricao: str, atracao: str, ingressos: [],
-                 depesas: float, local: Local):
+                 depesas: float):
         self.__codigo = codigo
         self.__data = data
         self.__nome = nome
@@ -13,7 +13,7 @@ class Evento:
         self.__atracao = atracao
         self.__ingressos = ingressos
         self.__despesas = depesas
-        self.__local = local
+        self.__local = None
 
 
 @property
@@ -87,5 +87,5 @@ def local(self):
 
 
 @local.setter
-def local(self, novo_local):
-    self.__local = novo_local
+def local(self, rua, bairro, cidade, cep, lotacao_maxima, aluguel):
+    self.__local = Local(rua, bairro, cidade, cep, lotacao_maxima, aluguel)
