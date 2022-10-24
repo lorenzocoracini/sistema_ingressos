@@ -19,13 +19,10 @@ class ControladorProdutor:
         except SystemError:
             self.__tela_produtor.usuario_ja_existe()
 
-    def retorna_produtor_e_senha_pelo_cpf(self, cpf):
+    def retorna_produtor_pelo_cpf(self, cpf):
         for produtor in self.__produtores:
             if produtor.cpf == cpf:
-                return [produtor, produtor.senha]
-
-    def escolher_acao(self):
-        print("login efetuado com sucesso")
+                return produtor
 
     def altera_produtor(self):
         pass

@@ -11,6 +11,9 @@ class TelaProdutor:
         print("1 - Adicionar evento")
         print("2 - Editar evento")
         print("3 - Transferir ingresso")
+        print('4 - Editar meus dados')
+        print('5 - Excluir conta')
+        print('6 - Sair da conta')
         opcao = int(input('ESCOLHA A OPÇÃO'))
         return opcao
 
