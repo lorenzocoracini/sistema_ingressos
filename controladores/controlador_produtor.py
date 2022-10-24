@@ -6,6 +6,7 @@ class ControladorProdutor:
     def __init__(self):
         self.__produtores = []
         self.__tela_produtor = TelaProdutor()
+        self.__tela_aberta = False
 
     def inclui_produtor(self, nome, cpf, nascimento, email, celular, senha):
         produtor = Produtor(nome, cpf, nascimento, email, celular, senha)
@@ -15,16 +16,26 @@ class ControladorProdutor:
                     raise SystemError
             else:
                 self.__produtores.append(produtor)
-                self.__tela_produtor.mostrar_opcoes_produtor()
         except SystemError:
             self.__tela_produtor.usuario_ja_existe()
 
-    def retorna_produtor_pelo_cpf(self, cpf):
+
+    def retorna_produtor_e_senha_pelo_cpf(self, cpf):
         for produtor in self.__produtores:
             if produtor.cpf == cpf:
-                return produtor
+                return [produtor,produtor.senha]
 
-    def altera_produtor(self):
+
+    def escolher_acao(self):
+        self.__tela_aberta = True
+        opcoes = {1:self.adicionar_evento, 2: self.editar_evento, 3: self.transferir_ingresso,
+                  4: self.altera_dados_produtor, 5: self.exclui_produtor, 6: self.sair_da_conta}
+        while self.__tela_aberta:
+            opcao = self.__tela_produtor.mostrar_opcoes_produtor()
+            opcoes[opcao]()
+
+
+    def altera_dados_produtor(self):
         pass
 
     def exclui_produtor(self):
@@ -50,3 +61,12 @@ class ControladorProdutor:
 
     def excluir_conta(self):
         pass
+
+    def editar_evento(self):
+        pass
+
+    def transferir_ingresso(self):
+        pass
+
+    def sair_da_conta(self):
+        self.__tela_aberta = False

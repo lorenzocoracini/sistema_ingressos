@@ -20,7 +20,9 @@ class ControladorPrincipal:
         dados = self.__tela_principal.mostra_tela_cadastro()
         if (dados["tipo_cadastro"]).lower() == "produtor":
             self.__controlador_produtor.inclui_produtor(dados["nome"], dados["cpf"], dados["nascimento"],
-                                                        dados["email"], dados["celular"], dados["senha"])
+                                                      dados["email"], dados["celular"], dados["senha"])
+            self.__controlador_produtor.escolher_acao()
+
         elif (dados["tipo_cadastro"]).lower() == "comprador":
             self.__controlador_comprador.inclui_comprador(dados["nome"], dados["cpf"], dados["nascimento"],
                                                           dados["email"], dados["celular"], dados["senha"])
