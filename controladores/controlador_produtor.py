@@ -1,11 +1,16 @@
 from entidades.produtor import Produtor
+from entidades.evento import Evento
+from entidades.local import Local
 from telas.tela_produtor import TelaProdutor
+from telas.tela_evento import TelaEvento
+from controladores.controlador_evento import ControladorEvento
 
 
 class ControladorProdutor:
     def __init__(self,controlador_principal):
         self.__produtores = []
         self.__tela_produtor = TelaProdutor()
+        self.__tela_evento = TelaEvento()
         self.__tela_aberta = False
         self.__controlador_principal = controlador_principal
 
@@ -52,10 +57,29 @@ class ControladorProdutor:
 
 
     def listar_produtores(self):
-        pass
+        return self.__produtores
 
     def adicionar_evento(self):
-        pass
+        dados = self.__tela_evento.pegar_dados()
+        local = Local(dados['rua_evento'],dados['bairro_evento'],dados['cidade_evento'],
+                      dados['cep_evento'],dados['lotacao_maxima'],dados['aluguel'])
+
+        evento = Evento(dados['codigo_evento'],dados['data_evento'],
+                        dados['nome_evento'],dados['descricao_evento'],
+                        dados['atracao_evento'],dados['despesas_evento'],local)
+        """
+        try:
+            for i in :
+                if produtor.cpf == i.cpf:
+                    raise SystemError
+            else:
+                self.__produtores.append(produtor)
+
+                return produtor
+        except SystemError:
+            self.__tela_produtor.usuario_ja_existe()
+        """
+
 
     def adicionar_venda_historico_vendas(self):
         pass

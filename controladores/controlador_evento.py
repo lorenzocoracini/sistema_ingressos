@@ -27,6 +27,10 @@ class ControladorEvento:
             if evento.codigo == codigo:
                 return evento
 
+    @property
+    def eventos(self):
+        return self.__eventos
+
     def alterar_evento(self):
         pass
 

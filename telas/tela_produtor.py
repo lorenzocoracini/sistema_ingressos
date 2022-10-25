@@ -14,6 +14,7 @@ class TelaProdutor:
         opcao = int(input('ESCOLHA A OPÇÃO: '))
         return opcao
 
+
     def deu_erro(self):
         print('deu erro')
 

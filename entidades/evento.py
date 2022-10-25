@@ -4,17 +4,16 @@ from datetime import datetime
 
 # https://www.programiz.com/python-programming/datetime
 class Evento:
-    def __init__(self, codigo: int, data: datetime, nome: str, descricao: str, atracao: str, ingressos: [],
-                 depesas: float):
+    def __init__(self, codigo: int, data: datetime, nome: str, descricao: str, atracao: str,
+                 depesas: float, ingressos: []):
         self.__codigo = codigo
         self.__data = data
         self.__nome = nome
         self.__descricao = descricao
         self.__atracao = atracao
-        self.__ingressos = ingressos
         self.__despesas = depesas
         self.__local = None
-
+        self.__ingressos = ingressos
 
     @property
     def codigo(self):
