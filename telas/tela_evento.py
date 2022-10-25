@@ -14,7 +14,7 @@ class TelaEvento:
     def pegar_dados(self):
         print("CADASTRO EVENTO")
         codigo = int(input('CODIGO: '))
-        data = str(input('DATA: '))
+        data = str(input('DATA (DD/MM/AA HORA:MIN : '))
         nome = str(input("NOME: "))
         descricao = str(input("DESCRIÇÃO: "))
         atracao = str(input("ATRAÇÕES: "))

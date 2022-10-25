@@ -13,7 +13,7 @@ class TelaPrincipal:
         print("Digite seus dados:")
         self.__nome = input("Nome: ")
         self.__cpf = int(input("CPF (Coloque apenas números):  "))
-        self.__nascimento = input("Nascimento: ")
+        self.__nascimento = input("Nascimento (DD/MM/AA): ")
         self.__email = input("Email: ")
         self.__celular = int(input("Celular (Coloque apenas números): "))
         self.__senha = input("Senha:")

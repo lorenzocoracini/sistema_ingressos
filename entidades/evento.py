@@ -4,10 +4,10 @@ from datetime import datetime
 
 # https://www.programiz.com/python-programming/datetime
 class Evento:
-    def __init__(self, codigo: int, data: datetime, nome: str, descricao: str, atracao: str,
+    def __init__(self, codigo: int, data: str, nome: str, descricao: str, atracao: str,
                  depesas: float, ingressos: []):
         self.__codigo = codigo
-        self.__data = data
+        self.__data = datetime.strptime(data, "%d/%m/%Y %H:%M:%S")
         self.__nome = nome
         self.__descricao = descricao
         self.__atracao = atracao
