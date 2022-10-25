@@ -32,3 +32,6 @@ class ControladorEvento:
 
     def excluir_evento(self):
         pass
+
+    def gerar_ingressos(self):
+        pass
