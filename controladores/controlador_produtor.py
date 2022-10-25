@@ -3,10 +3,12 @@ from telas.tela_produtor import TelaProdutor
 
 
 class ControladorProdutor:
-    def __init__(self):
+    def __init__(self,controlador_principal):
         self.__produtores = []
         self.__tela_produtor = TelaProdutor()
         self.__tela_aberta = False
+        self.__controlador_principal = controlador_principal
+
 
     def inclui_produtor(self, nome, cpf, nascimento, email, celular, senha):
         produtor = Produtor(nome, cpf, nascimento, email, celular, senha)
@@ -16,8 +18,12 @@ class ControladorProdutor:
                     raise SystemError
             else:
                 self.__produtores.append(produtor)
+
+                return produtor
         except SystemError:
             self.__tela_produtor.usuario_ja_existe()
+
+
 
 
     def retorna_produtor_e_senha_pelo_cpf(self, cpf):
@@ -39,7 +45,11 @@ class ControladorProdutor:
         pass
 
     def exclui_produtor(self):
-        pass
+        for produtor in self.__produtores:
+            if produtor.cpf == self.__controlador_principal.usuario_logado.cpf:
+                self.__produtores.remove(produtor)
+                break
+
 
     def listar_produtores(self):
         pass
@@ -70,3 +80,4 @@ class ControladorProdutor:
 
     def sair_da_conta(self):
         self.__tela_aberta = False
+        self.__controlador_principal.deslogar()
