@@ -22,3 +22,17 @@ class TelaComprador:
 
     def escolher_dado_para_alterar(self):
         print("Escolha qual dado quer alterar:")
+        print("1 - Nome")
+        print("2 - CPF")
+        print("3 - Nascimento")
+        print("4 - Email")
+        print("5 - Celular")
+        print("6 - Senha")
+        opcao = int(input("Digite a opção desejada: "))
+        if opcao == 2 or opcao == 5:
+            dado_atualizado = int(input("Digite o dado atualizado: "))
+        elif opcao == 3:
+            input("Digite o dado atualizado (dd/mm/aa: ")
+        else:
+            input("Digite o dado atualizado: ")
+        return opcao, dado_atualizado

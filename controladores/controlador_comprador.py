@@ -3,9 +3,10 @@ from telas.tela_comprador import TelaComprador
 
 
 class ControladorComprador:
-    def __init__(self):
+    def __init__(self, controlador_principal):
         self.__tela_comprador = TelaComprador()
         self.__compradores = []
+        self.__controlador_principal = controlador_principal
         self.__tela_aberta = False
 
     def inclui_comprador(self, nome, cpf, nascimento, email, celular, senha):
@@ -34,8 +35,16 @@ class ControladorComprador:
             opcao = self.__tela_comprador.mostrar_opcoes_comprador()
             opcoes[opcao]()
 
-    def alterar_dados_comprador(self, dado_a_ser_alterado):
-        pass
+    def alterar_dados_comprador(self):
+        dicionario_dados = {1: self.__controlador_principal.usuario_logado.nome,
+                            2: self.__controlador_principal.usuario_logado.cpf,
+                            3: self.__controlador_principal.usuario_logado.nascimento,
+                            4: self.__controlador_principal.usuario_logado.email,
+                            5: self.__controlador_principal.usuario_logado.celular,
+                            6: self.__controlador_principal.usuario_logado.senha}
+        num_do_dado, dado_a_ser_alterado = self.__tela_comprador.escolher_dado_para_alterar()
+        dicionario_dados[num_do_dado] = dado_a_ser_alterado
+
 
     def excluir_comprador(self):
         pass
@@ -57,6 +66,7 @@ class ControladorComprador:
 
     def sair_da_conta(self):
         self.__tela_aberta = False
+        self.__controlador_principal.deslogar()
 
     def excluir_conta(self):
         pass
