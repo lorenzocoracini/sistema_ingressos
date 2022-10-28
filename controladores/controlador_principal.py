@@ -22,11 +22,12 @@ class ControladorPrincipal:
         if (dados["tipo_cadastro"]).lower() == "produtor":
             self.__usuario_logado = self.__controlador_produtor.inclui_produtor(dados["nome"], dados["cpf"], dados["nascimento"],
                                                       dados["email"], dados["celular"], dados["senha"])
+            self.__tela_principal.acao_realizada()
             self.__controlador_produtor.escolher_acao()
         elif (dados["tipo_cadastro"]).lower() == "comprador":
             self.__usuario_logado = self.__controlador_comprador.inclui_comprador(dados["nome"], dados["cpf"], dados["nascimento"],
                                                           dados["email"], dados["celular"], dados["senha"])
-            print(self.__usuario_logado)
+            self.__tela_principal.acao_realizada()
             self.__controlador_comprador.escolher_acao()
 
 
@@ -36,9 +37,11 @@ class ControladorPrincipal:
         produtor = self.__controlador_produtor.retorna_produtor_e_senha_pelo_cpf(dados_login["cpf"])
         if comprador:
             if dados_login["senha"] == comprador[1]:
+                self.__tela_principal.acao_realizada()
                 self.__controlador_comprador.escolher_acao()
         elif produtor:
             if dados_login["senha"] == produtor[1]:
+                self.__tela_principal.acao_realizada()
                 self.__controlador_produtor.escolher_acao()
 
 

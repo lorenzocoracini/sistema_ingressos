@@ -17,6 +17,7 @@ class ControladorComprador:
                     raise SystemError
             else:
                 self.__compradores.append(comprador)
+                return comprador
                 #fazer metodo acao realizada com sucesso
         except SystemError:
             self.__tela_comprador.usuario_ja_existe()
@@ -28,9 +29,9 @@ class ControladorComprador:
 
     def escolher_acao(self):
         self.__tela_aberta = True
-        opcoes = {1:self.ver_meus_ingressos, 2: self.ver_eventos_disponiveis, 3: self.favoritar_evento,
-                  4: self.transferir_ingresso, 5: self.alterar_dados_comprador, 6: self.excluir_conta,
-                  7: self.sair_da_conta}
+        opcoes = {1: self.ver_meus_ingressos, 2: self.ver_eventos_disponiveis,3: self.ver_eventos_favoritos,
+                  4: self.favoritar_evento, 5: self.transferir_ingresso, 6: self.alterar_dados_comprador,
+                  7: self.excluir_comprador, 8: self.sair_da_conta}
         while self.__tela_aberta:
             opcao = self.__tela_comprador.mostrar_opcoes_comprador()
             opcoes[opcao]()
@@ -47,26 +48,35 @@ class ControladorComprador:
 
 
     def excluir_comprador(self):
-        pass
-
-    def listar_compradores(self):
-        pass
+        usuario_para_excluir = self.__controlador_principal.usuario_logado
+        print(usuario_para_excluir)
+        self.__compradores.remove(usuario_para_excluir)
+        self.sair_da_conta()
 
     def ver_meus_ingressos(self):
-        pass
+        self.__tela_comprador.mostrar_meus_ingressos(self.__controlador_principal.usuario_logado.meus_ingressos)
 
     def ver_eventos_disponiveis(self):
         pass
 
+    def ver_eventos_favoritos(self):
+        self.__tela_comprador.mostrar_eventos_favoritos(self.__controlador_principal.usuario_logado.eventos_favoritos)
+
     def favoritar_evento(self):
         pass
 
-    def transferir_ingresso(self, cpf_para_transferir):
-        pass
+    def transferir_ingresso(self):
+        cpf_para_transferir, evento, codigo_ingresso = self.__tela_comprador.pegar_dados_transferir_ingresso()
+        for ingresso in self.__controlador_principal.usuario_logado.meus_ingressos:
+            if ingresso.evento == evento and ingresso.codigo == codigo_ingresso:
+                ingresso_para_transferir = ingresso
+                self.__controlador_principal.usuario_logado.meus_ingressos.remove(ingresso_para_transferir)
+                comprador_para_transferir = self.retorna_comprador_e_senha_pelo_cpf(cpf_para_transferir)[0]
+                comprador_para_transferir.meus_ingressos.append(ingresso_para_transferir)
 
     def sair_da_conta(self):
         self.__tela_aberta = False
         self.__controlador_principal.deslogar()
 
-    def excluir_conta(self):
-        pass
+    #def listar_compradores(self):
+        #pass

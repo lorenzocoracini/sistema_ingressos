@@ -26,3 +26,6 @@ class TelaPrincipal:
         self.__cpf_login = int(input("CPF: "))
         self.__senha_login = input("SENHA:")
         return {"cpf": self.__cpf_login, "senha": self.__senha_login}
+
+    def acao_realizada(self):
+        print(" A ação foi realizada com sucesso!")

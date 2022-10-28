@@ -1,13 +1,14 @@
 class TelaComprador:
     def mostrar_opcoes_comprador(self):
-        print("Login efetuado com sucesso!")
+        print("*"*20)
         print("1 - Ver meus ingressos")
         print("2 - Ver eventos disponíveis")
-        print("3 - Favoritar Evento")
-        print("4 - Transferir ingresso")
-        print("5 - Editar meus dados")
-        print("6 - Excluir Conta")
-        print("7 - Sair da Conta")
+        print("3 - Ver eventos Favoritos")
+        print("4 - Favoritar Evento")
+        print("5 - Transferir ingresso")
+        print("6 - Editar meus dados")
+        print("7 - Excluir Conta")
+        print("8 - Sair da Conta")
         opcao = input("Digite a opcao desejada:")
         return int(opcao)
 
@@ -32,7 +33,25 @@ class TelaComprador:
         if opcao == 2 or opcao == 5:
             dado_atualizado = int(input("Digite o dado atualizado: "))
         elif opcao == 3:
-            input("Digite o dado atualizado (dd/mm/aa: ")
+            dado_atualizado = input("Digite o dado atualizado (dd/mm/aa): ")
         else:
-            input("Digite o dado atualizado: ")
+            dado_atualizado = input("Digite o dado atualizado: ")
         return opcao, dado_atualizado
+
+    def mostrar_meus_ingressos(self, ingressos):
+        for ingresso in ingressos:
+            print(ingresso)
+
+    def pegar_dados_para_favoritar_evento(self):
+        print()
+
+    def mostrar_eventos_favoritos(self, eventos_favoritos):
+        for evento in eventos_favoritos:
+            print(evento.nome)
+
+    def pegar_dados_transferir_ingresso(self):
+        print("Dados para a tranferência de ingresso:")
+        cpf = int(input("Digite o cpf da pessoa:"))
+        nome_do_evento = input("Digite o nome do evento: ")
+        codigo_do_ingresso= int(input("Digite o código do ingresso a ser transferido: "))
+        return cpf, nome_do_evento, codigo_do_ingresso

@@ -6,9 +6,9 @@ class ContraladorIngressos:
     def __init__(self):
         self.__ingressos = []
 
-    def adicionar_ingresso(self, valor: float, codigo: int, lote: int, comprador: Comprador):
-        ingresso = Ingresso(valor, codigo, lote, comprador)
-
+    def adicionar_ingresso(self, valor: float, codigo: int, lote: int, evento: str):
+        ingresso = Ingresso(valor, codigo, lote, evento)
+        #atualizar esse metodo com a adição do atributo evento
         try:
             for i in self.__ingressos:
                 if ingresso.codigo == i.codigo:

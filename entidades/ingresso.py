@@ -2,11 +2,12 @@ from entidades.comprador import Comprador
 
 
 class Ingresso:
-    def __init__(self, valor: float, codigo: int, lote: int, comprador: Comprador):
+    def __init__(self, valor: float, codigo: int, lote: int, evento: str):
         self.__valor = valor
         self.__codigo = codigo
         self.__lote = lote
-        self.__comprador = comprador
+        self.__evento = evento
+        self.__comprador = None
 
     @property
     def valor(self):
@@ -31,6 +32,14 @@ class Ingresso:
     @lote.setter
     def lote(self, novo_lote):
         self.__lote = novo_lote
+
+    @property
+    def evento(self):
+        return self.__evento
+
+    @evento.setter
+    def evento(self, evento):
+        self.__evento = evento
 
     @property
     def comprador(self):
