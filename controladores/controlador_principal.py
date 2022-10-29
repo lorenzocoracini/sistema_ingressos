@@ -1,3 +1,4 @@
+import datetime
 import sys
 
 from controladores.controlador_comprador import ControladorComprador
@@ -15,15 +16,16 @@ class ControladorPrincipal:
         self.__controlador_comprador = ControladorComprador(self)
         self.__controlador_produtor = ControladorProdutor(self)
         self.__usuario_logado = None
+        self.__eventos_disponiveis = []
 
     def cadastro_novo_usuario(self):
         dados = self.__tela_principal.mostra_tela_cadastro()
-        if (dados["tipo_cadastro"]).lower() == "produtor":
+        if dados["tipo_cadastro"] == 2:
             self.__usuario_logado = self.__controlador_produtor.inclui_produtor(dados["nome"], dados["cpf"], dados["nascimento"],
                                                       dados["email"], dados["celular"], dados["senha"])
             self.__tela_principal.acao_realizada()
             self.__controlador_produtor.escolher_acao()
-        elif (dados["tipo_cadastro"]).lower() == "comprador":
+        elif dados["tipo_cadastro"] == 1:
             self.__usuario_logado = self.__controlador_comprador.inclui_comprador(dados["nome"], dados["cpf"], dados["nascimento"],
                                                           dados["email"], dados["celular"], dados["senha"])
             self.__tela_principal.acao_realizada()
@@ -66,3 +68,17 @@ class ControladorPrincipal:
 
     def deslogar(self):
         self.__usuario_logado = None
+
+    @property
+    def eventos_disponiveis(self):
+        return self.__eventos_disponiveis
+
+    @eventos_disponiveis.setter
+    def eventos_disponiveis(self, evento):
+        self.__eventos_disponiveis = evento
+
+    def atualizar_eventos_disponiveis(self):
+        self.__eventos_disponiveis = []
+        for evento in self.__controlador_produtor.eventos:
+            if evento.data >= datetime.datetime.today():
+                self.__eventos_disponiveis.append(evento)

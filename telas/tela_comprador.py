@@ -48,10 +48,16 @@ class TelaComprador:
             print(ingresso)
 
     def pegar_dados_para_favoritar_evento(self):
-        print()
+        print("Favoritar Evento")
+        codigo = int(input("Digite o cógido do evento a ser favoritado: "))
+        return codigo
 
     def mostrar_eventos_favoritos(self, eventos_favoritos):
         for evento in eventos_favoritos:
+            print(evento.nome)
+
+    def mostrar_eventos_disponiveis(self, eventos_disponiveis):
+        for evento in eventos_disponiveis:
             print(evento.nome)
 
     def pegar_dados_transferir_ingresso(self):

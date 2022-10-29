@@ -7,8 +7,6 @@ from entidades.ingresso import Ingresso
 from telas.tela_ingresso import TelaIngresso
 
 
-
-
 class ControladorProdutor:
     def __init__(self, controlador_principal):
         self.__eventos = []
@@ -122,8 +120,8 @@ class ControladorProdutor:
         quantidade_de_ingressos = 1
         ingressos = []
 
-        while quantidade_de_ingressos <= lotacao:
-            ingresso_novo = Ingresso(valor,quantidade_de_ingressos,lote)
+        while quantidade_de_ingressos < lotacao:
+            ingresso_novo = Ingresso(valor, quantidade_de_ingressos, lote)
             quantidade_de_ingressos+=1
             ingressos.append(ingresso_novo)
 
@@ -144,3 +142,7 @@ class ControladorProdutor:
     def sair_da_conta(self):
         self.__tela_aberta = False
         self.__controlador_principal.deslogar()
+
+    @property
+    def eventos(self):
+        return self.__eventos

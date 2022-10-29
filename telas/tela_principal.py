@@ -17,7 +17,7 @@ class TelaPrincipal:
         self.__email = input("Email: ")
         self.__celular = int(input("Celular (Coloque apenas números): "))
         self.__senha = input("Senha:")
-        self.__tipo = input("Forma de cadastro (Comprador ou Produtor): ")
+        self.__tipo = int(input("Forma de cadastro (Digite o número: 1 - Comprador ou 2 - Produtor): "))
         return {"nome": self.__nome, "cpf": self.__cpf, "nascimento": self.__nascimento,
                 "email": self.__email, "celular": self.__celular,"senha": self.__senha, "tipo_cadastro":self.__tipo}
 
