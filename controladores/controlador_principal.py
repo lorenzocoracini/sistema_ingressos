@@ -6,7 +6,6 @@ from controladores.controlador_ingresso import ContraladorIngressos
 from controladores.controlador_produtor import ControladorProdutor
 from telas.tela_principal import TelaPrincipal
 
-
 class ControladorPrincipal:
 
     def __init__(self):

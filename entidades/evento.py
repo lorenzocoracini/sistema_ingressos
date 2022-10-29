@@ -2,18 +2,19 @@ from entidades.local import Local
 from datetime import datetime
 
 
+
 # https://www.programiz.com/python-programming/datetime
 class Evento:
     def __init__(self, codigo: int, data: str, nome: str, descricao: str, atracao: str,
-                 depesas: float, ingressos: []):
+                 depesas: float, local:Local):
         self.__codigo = codigo
         self.__data = datetime.strptime(data, "%d/%m/%Y %H:%M")
         self.__nome = nome
         self.__descricao = descricao
         self.__atracao = atracao
         self.__despesas = depesas
-        self.__local = None
-        self.__ingressos = ingressos
+        self.__local = local
+        self.__ingressos = []
 
     @property
     def codigo(self):

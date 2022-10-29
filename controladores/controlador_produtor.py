@@ -3,6 +3,10 @@ from entidades.evento import Evento
 from entidades.local import Local
 from telas.tela_produtor import TelaProdutor
 from telas.tela_evento import TelaEvento
+from entidades.ingresso import Ingresso
+from telas.tela_ingresso import TelaIngresso
+
+
 
 
 class ControladorProdutor:
@@ -13,6 +17,8 @@ class ControladorProdutor:
         self.__tela_evento = TelaEvento()
         self.__tela_aberta = False
         self.__controlador_principal = controlador_principal
+        self.__tela_ingresso = TelaIngresso()
+
 
     def listar_eventos(self):
         self.__tela_produtor.mostar_eventos(self.__eventos)
@@ -23,6 +29,8 @@ class ControladorProdutor:
         for evento in self.__eventos:
             if evento.codigo == codigo_evento:
                 evento_a_ser_alterado = evento
+
+        print(evento_a_ser_alterado)
 
 
         dicionario_dados = {1: evento_a_ser_alterado.codigo, 2: evento_a_ser_alterado.data,
@@ -95,11 +103,33 @@ class ControladorProdutor:
         if not self.retorna_evento_pelo_codigo(evento.codigo):
             self.__eventos.append(evento)
 
+
+        lotacao = dados_evento['lotacao_maxima_evento']
+        self.gerar_ingressos(lotacao)
+
     def remover_evento(self):
         codigo = self.__tela_produtor.remover_evento()
         for evento in self.__eventos:
             if evento.codigo == codigo:
                 self.__eventos.remove(evento)
+
+
+    def gerar_ingressos(self,lotacao):
+        dados = self.__tela_ingresso.pegar_dados()
+        valor = dados['valor_do_ingresso']
+        lote = dados['lote_do_ingresso']
+        lotacao = lotacao
+        quantidade_de_ingressos = 1
+        ingressos = []
+
+        while quantidade_de_ingressos <= lotacao:
+            ingresso_novo = Ingresso(valor,quantidade_de_ingressos,lote)
+            quantidade_de_ingressos+=1
+            ingressos.append(ingresso_novo)
+
+        print(quantidade_de_ingressos)
+        print(ingressos[0])
+        print(ingressos[0].valor)
 
 
     def transferir_ingresso(self):

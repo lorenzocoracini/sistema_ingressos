@@ -1,8 +1,5 @@
-from entidades.evento import Evento
-from datetime import *
 from telas.tela_evento import TelaEvento
-from entidades.local import Local
-from controladores.controlador_produtor import ControladorProdutor
+
 
 
 class ControladorEvento:
@@ -11,4 +8,8 @@ class ControladorEvento:
 
 
     def gerar_ingressos(self):
-        pass
+        lotacao_max = self.__tela_evento.pegar_dados()
+        lotacao_max = lotacao_max['lotacao_maxima_evento']
+        qtd_ingressos = 0
+        while qtd_ingressos <= lotacao_max:
+            ingresso()

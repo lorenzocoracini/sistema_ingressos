@@ -1,9 +1,8 @@
 class TelaIngresso:
-    def mostar_opcoes(self):
-        pass
 
     def pegar_dados(self):
-        pass
-
-    def listar_dados_eventos(self):
-        pass
+        print('DADOS INGRESSOS')
+        valor = float(input('Digite o valor do ingresso: '))
+        lote = int(input('Digite o lote do ingresso: '))
+        return {'valor_do_ingresso': valor,
+                'lote_do_ingresso': lote}
