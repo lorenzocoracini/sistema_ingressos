@@ -43,6 +43,7 @@ class ControladorComprador:
                             4: self.__controlador_principal.usuario_logado.email,
                             5: self.__controlador_principal.usuario_logado.celular,
                             6: self.__controlador_principal.usuario_logado.senha}
+        self.__tela_comprador.listar_dados_comprador(self.__controlador_principal.usuario_logado)
         num_do_dado, dado_a_ser_alterado = self.__tela_comprador.escolher_dado_para_alterar()
         dicionario_dados[num_do_dado] = dado_a_ser_alterado
 

@@ -15,8 +15,13 @@ class TelaComprador:
     def deu_erro(self):
         print("Os dados fornecidos estão errados!")
 
-    def listar_dados_comprador(self):
-        pass
+    def listar_dados_comprador(self, comprador_logado):
+        print("Nome: ", comprador_logado.nome)
+        print("CPF: ", comprador_logado.cpf)
+        print("Nascimento: ", comprador_logado.nascimento)
+        print("Email: ", comprador_logado.email)
+        print("Celular: ", comprador_logado.celular)
+        print("Senha: ", comprador_logado.senha)
 
     def usuario_ja_existe(self):
         print("O usuário já existe, faça login com o cpf fornecido.")
