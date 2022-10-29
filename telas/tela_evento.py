@@ -29,7 +29,7 @@ class TelaEvento:
 
         return {'codigo_evento': codigo, 'data_evento': data, 'nome_evento': nome, 'descricao_evento': descricao,
                 'atracao_evento': atracao, 'despesas_evento': despesas, 'rua_evento': rua, 'bairro_evento': bairro,
-                'cidade_evento': cidade, 'cep_evento': cep, 'lotacao_maxima_evento': lotacao_maxima, 'alugel': aluguel}
+                'cidade_evento': cidade, 'cep_evento': cep, 'lotacao_maxima_evento': lotacao_maxima, 'aluguel_evento': aluguel}
 
     def listar_dados_eventos(self):
         pass

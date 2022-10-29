@@ -37,10 +37,12 @@ class ControladorPrincipal:
         produtor = self.__controlador_produtor.retorna_produtor_e_senha_pelo_cpf(dados_login["cpf"])
         if comprador:
             if dados_login["senha"] == comprador[1]:
+                self.__usuario_logado = comprador[0]
                 self.__tela_principal.acao_realizada()
                 self.__controlador_comprador.escolher_acao()
         elif produtor:
             if dados_login["senha"] == produtor[1]:
+                self.__usuario_logado = produtor[0]
                 self.__tela_principal.acao_realizada()
                 self.__controlador_produtor.escolher_acao()
 

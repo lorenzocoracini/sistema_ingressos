@@ -7,7 +7,7 @@ class Evento:
     def __init__(self, codigo: int, data: str, nome: str, descricao: str, atracao: str,
                  depesas: float, ingressos: []):
         self.__codigo = codigo
-        self.__data = datetime.strptime(data, "%d/%m/%Y %H:%M:%S")
+        self.__data = datetime.strptime(data, "%d/%m/%Y %H:%M")
         self.__nome = nome
         self.__descricao = descricao
         self.__atracao = atracao
