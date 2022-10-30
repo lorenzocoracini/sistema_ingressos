@@ -11,11 +11,13 @@ class ControladorProdutor:
     def __init__(self, controlador_principal):
         self.__eventos = []
         self.__produtores = []
-        self.__tela_produtor = TelaProdutor()
-        self.__tela_evento = TelaEvento()
+        self.__tela_produtor = TelaProdutor(self)
+        self.__tela_evento = TelaEvento(self)
         self.__tela_aberta = False
         self.__controlador_principal = controlador_principal
         self.__tela_ingresso = TelaIngresso()
+
+
 
     def listar_eventos(self):
         self.__tela_produtor.mostar_eventos(self.__eventos)
@@ -115,7 +117,7 @@ class ControladorProdutor:
         lote = dados['lote_do_ingresso']
         evento = dados['evento_do_ingresso']
         lotacao = lotacao
-        quantidade_de_ingressos = 1
+        quantidade_de_ingressos = 0
         ingressos = []
 
         while quantidade_de_ingressos < lotacao:

@@ -17,6 +17,9 @@ class Evento:
         self.__ingressos = []
         self.__ingressos_vendidos = []
 
+
+
+
     @property
     def codigo(self):
         return self.__codigo

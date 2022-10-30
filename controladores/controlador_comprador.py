@@ -4,7 +4,7 @@ from telas.tela_comprador import TelaComprador
 
 class ControladorComprador:
     def __init__(self, controlador_principal):
-        self.__tela_comprador = TelaComprador()
+        self.__tela_comprador = TelaComprador(self)
         self.__compradores = []
         self.__controlador_principal = controlador_principal
         self.__tela_aberta = False
