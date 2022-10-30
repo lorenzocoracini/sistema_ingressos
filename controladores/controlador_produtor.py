@@ -17,26 +17,22 @@ class ControladorProdutor:
         self.__controlador_principal = controlador_principal
         self.__tela_ingresso = TelaIngresso()
 
-
-
     def listar_eventos(self):
         self.__tela_produtor.mostar_eventos(self.__eventos)
 
     def editar_evento(self):
-        codigo_evento, opcao, dado_atualizado = self.__tela_produtor.alterar_evento()
+        codigo_evento, dados_atualizados = self.__tela_produtor.alterar_evento()
         evento_a_ser_alterado = None
         for evento in self.__eventos:
             if evento.codigo == codigo_evento:
                 evento_a_ser_alterado = evento
 
-        print(evento_a_ser_alterado)
-
-        dicionario_dados = {1: evento_a_ser_alterado.codigo, 2: evento_a_ser_alterado.data,
-                            3: evento_a_ser_alterado.nome, 4: evento_a_ser_alterado.descricao,
-                            5: evento_a_ser_alterado.atracao, 6: evento_a_ser_alterado.despesas}
-
-        dicionario_dados[opcao] = dado_atualizado
-        print(evento_a_ser_alterado.nome)
+        evento_a_ser_alterado.codigo = (dados_atualizados['codigo_evento'])
+        evento_a_ser_alterado.data = (dados_atualizados['data_evento'])
+        evento_a_ser_alterado.nome = (dados_atualizados['nome_evento'])
+        evento_a_ser_alterado.descricao = (dados_atualizados['descricao_evento'])
+        evento_a_ser_alterado.atracao = (dados_atualizados['atracao_evento'])
+        evento_a_ser_alterado.despesas = (dados_atualizados['despesas_evento'])
 
     def altera_dados_produtor(self):
         dicionario_dados = {1: self.__controlador_principal.usuario_logado.nome,

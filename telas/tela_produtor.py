@@ -27,24 +27,19 @@ class TelaProdutor:
 
 
     def alterar_evento(self):
-        print("Escolha dado que deseja alterar:")
-        print('1 - Codigo')
-        print('2 - Data')
-        print('3 - Nome')
-        print('4 - Descrição')
-        print('5 - Atrações')
-        print('6 - Despesas')
         codigo_evento = int(input('Digite o código do evento que deseja editar:'))
-        opcao = int(input('Digite a opção desejada: '))
-        if opcao == 2:
-            dado_atualizado = input("Digite a data do evento atualizado (dd/mm/aa %h:%m):")
-        elif opcao == 1:
-            dado_atualizado = int(input('Digite o codigo atualizado: '))
-        elif opcao == 6:
-            dado_atualizado = float(input('Digite as despesas atualizadas: '))
-        else:
-            dado_atualizado = input('Digite o dado atualizado')
-        return codigo_evento, opcao, dado_atualizado
+        print("Preencha os dados atualizados:")
+        codigo = int(input('CODIGO: '))
+        data = str(input('DATA (dd/mm/aaaa hh:mm)'))
+        nome = str(input("NOME: "))
+        descricao = str(input("DESCRIÇÃO: "))
+        atracao = str(input("ATRAÇÕES: "))
+        despesas = int(input("DESPESAS: "))
+
+        dados_atualizados={'codigo_evento': codigo, 'data_evento': data, 'nome_evento': nome, 'descricao_evento': descricao,
+                           'atracao_evento': atracao, 'despesas_evento':despesas}
+
+        return codigo_evento,dados_atualizados
 
     def escolher_dado_para_alterar(self):
         print("Escolha qual dado que deseja alterar:")
