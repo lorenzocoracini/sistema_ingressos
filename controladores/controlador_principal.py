@@ -44,11 +44,16 @@ class ControladorPrincipal:
                 self.__usuario_logado = comprador[0]
                 self.__tela_principal.acao_realizada()
                 self.__controlador_comprador.escolher_acao()
+            else:
+                self.__tela_principal.credenciais_incorretas()
+
         elif produtor:
             if dados_login["senha"] == produtor[1]:
                 self.__usuario_logado = produtor[0]
                 self.__tela_principal.acao_realizada()
                 self.__controlador_produtor.escolher_acao()
+            else:
+                self.__tela_principal.credenciais_incorretas()
 
 
     def finaliza(self):

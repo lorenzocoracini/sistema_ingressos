@@ -25,7 +25,11 @@ class TelaPrincipal:
                 self.__nome = input("Nome: ")
                 self.__cpf = int(input("CPF (Coloque apenas números):  "))
                 dia_nascimento = int(input("Digite o dia do seu nascimento: "))
-                mes_nascimento = int(input("Digite o mês do seu nascimento: "))
+                if dia_nascimento <= 0 or dia_nascimento > 31:
+                    raise ValueError
+                mes_nascimento = int(input("Digite o número correspondente ao mês do seu nascimento: "))
+                if mes_nascimento > 12 or mes_nascimento <= 0:
+                    raise ValueError
                 ano_nascimento = int(input("Digite o ano do seu nascimento: "))
                 self.__email = input("Email: ")
                 self.__celular = int(input("Celular (Coloque apenas números): "))
@@ -39,9 +43,16 @@ class TelaPrincipal:
 
     def mostrar_tela_login(self):
         print("Digite seus dados:")
-        self.__cpf_login = int(input("CPF: "))
-        self.__senha_login = input("SENHA:")
-        return {"cpf": self.__cpf_login, "senha": self.__senha_login}
+        while True:
+            try:
+                self.__cpf_login = int(input("CPF: "))
+                self.__senha_login = input("SENHA:")
+                return {"cpf": self.__cpf_login, "senha": self.__senha_login}
+            except ValueError:
+                print("Dados errados, favor inserir os dados segundo as instruções.")
 
     def acao_realizada(self):
         print(" A ação foi realizada com sucesso!")
+
+    def credenciais_incorretas(self):
+        print("A senha digitada não confere com o cpf.")
