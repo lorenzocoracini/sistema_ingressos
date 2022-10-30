@@ -9,11 +9,19 @@ class TelaComprador:
         print("6 - Editar meus dados")
         print("7 - Excluir Conta")
         print("8 - Sair da Conta")
-        opcao = input("Digite a opcao desejada:")
-        return int(opcao)
-
-    def deu_erro(self):
-        print("Os dados fornecidos estão errados!")
+        while True:
+            try:
+                opcao = int(input("Digite a opcao desejada:"))
+                if isinstance(opcao, int) and 1 <= opcao <= 8:
+                    return opcao
+                    break
+                else:
+                    raise ValueError
+            except ValueError:
+                opcao = int(input("A opção digitada não é válida, favor digite novamente: "))
+                if isinstance(opcao, int) and 1 <= opcao <= 8:
+                    return opcao
+                    break
 
     def listar_dados_comprador(self, comprador_logado):
         print("Nome: ", comprador_logado.nome)
@@ -23,8 +31,6 @@ class TelaComprador:
         print("Celular: ", comprador_logado.celular)
         print("Senha: ", comprador_logado.senha)
 
-    def usuario_ja_existe(self):
-        print("O usuário já existe, faça login com o cpf fornecido.")
 
     def escolher_dado_para_alterar(self):
         print("Escolha qual dado quer alterar:")
@@ -70,3 +76,9 @@ class TelaComprador:
     def pegar_evento_para_compra(self):
         evento = input('Digite o nome do evento que você deseja comprar: ')
         return evento
+
+    def deu_erro(self):
+        print("Os dados fornecidos estão errados!")
+
+    def usuario_ja_existe(self):
+        print("O usuário já existe, faça login com o cpf fornecido.")
