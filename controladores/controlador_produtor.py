@@ -5,6 +5,8 @@ from telas.tela_produtor import TelaProdutor
 from telas.tela_evento import TelaEvento
 from entidades.ingresso import Ingresso
 from telas.tela_ingresso import TelaIngresso
+from entidades.comprador import Comprador
+
 
 
 class ControladorProdutor:

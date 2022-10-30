@@ -18,6 +18,10 @@ class ControladorPrincipal:
         self.__usuario_logado = None
         self.__eventos_disponiveis = []
 
+
+
+
+
     def cadastro_novo_usuario(self):
         dados = self.__tela_principal.mostra_tela_cadastro()
         if dados["tipo_cadastro"] == 2:
