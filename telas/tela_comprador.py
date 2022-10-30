@@ -9,12 +9,11 @@ class TelaComprador:
         print("3 - Ver eventos Favoritos")
         print("4 - Favoritar Evento")
         print("5 - Comprar Ingresso")
-        print("6 - Editar meus dados")
-        print("7 - Excluir Conta")
-        print("8 - Sair da Conta")
+        print("6 - Excluir Conta")
+        print("7 - Sair da Conta")
         try:
             opcao = int(input("Digite a opcao desejada:"))
-            if isinstance(opcao, int) and 1 <= opcao <= 8:
+            if isinstance(opcao, int) and 1 <= opcao <= 7:
                 return opcao
             else:
                 raise ValueError
@@ -30,21 +29,6 @@ class TelaComprador:
         print("Celular: ", comprador_logado.celular)
         print("Senha: ", comprador_logado.senha)
 
-    def editar_dados(self):
-        print("Digite os dados atualizados:")
-        nome = str(input("Nome: "))
-        cpf = int(input("CPF: "))
-        dia_nascimento = str(input("Dia de nascimento :"))
-        mes_nascimento = str(input("Mês do nascimento: "))
-        ano_nascimento = str(input("Ano do nascimento: "))
-        email = str(input("Email: "))
-        celular = int(input("Celular: "))
-        senha = int(input("Senha: "))
-
-
-        dados_atualizados = {'nome': nome, 'cpf': cpf, "nascimento": f"{dia_nascimento}/{mes_nascimento}/{ano_nascimento}",
-                             'email': email, 'celular': celular, 'senha': senha}
-        return dados_atualizados
 
     def mostrar_meus_ingressos(self, ingressos):
         for ingresso in ingressos:

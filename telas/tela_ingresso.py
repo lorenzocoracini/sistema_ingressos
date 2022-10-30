@@ -34,11 +34,3 @@ class TelaIngresso:
         lista = lista_de_ingressos
         for ing in lista:
             print(ing)
-    '''
-
-    def pegar_dados_para_transferencia_do_ingresso(self):
-        codigo = int(input('Digite o código do ingresso que será transferiado: '))
-        cpf_que_vai_receber_ingresso = int(input('Digite o cpf de quem vai receber o ingresso'))
-
-        return codigo, cpf_que_vai_receber_ingresso
-    '''

@@ -33,34 +33,10 @@ class ControladorComprador:
     def escolher_acao(self):
         self.__tela_aberta = True
         opcoes = {1: self.ver_meus_ingressos, 2: self.ver_eventos_disponiveis,3: self.ver_eventos_favoritos,
-                  4: self.favoritar_evento, 5: self.comprar_ingresso, 6: self.alterar_dados_comprador,
-                  7: self.excluir_comprador, 8: self.sair_da_conta}
+                  4: self.favoritar_evento, 5: self.comprar_ingresso, 6: self.excluir_comprador, 7: self.sair_da_conta}
         while self.__tela_aberta:
             opcao = self.__tela_comprador.mostrar_opcoes_comprador()
             opcoes[opcao]()
-
-    def alterar_dados_comprador(self):
-        #mostra dados antigos
-        self.__tela_comprador.listar_dados_comprador(self.__controlador_principal.usuario_logado)
-
-        usuario = None
-        for comprador in self.__compradores:
-            if comprador.cpf == self.__controlador_principal.usuario_logado.cpf:
-                usuario = comprador
-
-
-        dados_atualizados = self.__tela_comprador.editar_dados()
-        usuario.nome = dados_atualizados['nome']
-        usuario.cpf = dados_atualizados['cpf']
-        usuario.nascimento = dados_atualizados['nascimento']
-        usuario.email = dados_atualizados['email']
-        usuario.celular = dados_atualizados['celular']
-        usuario.senha = dados_atualizados['senha']
-
-
-        #teste
-        self.__tela_comprador.listar_dados_comprador(self.__controlador_principal.usuario_logado)
-
 
     def excluir_comprador(self):
         usuario_para_excluir = self.__controlador_principal.usuario_logado
@@ -86,15 +62,6 @@ class ControladorComprador:
         else:
             self.__tela_comprador.evento_nao_existe()
 
-    def transferir_ingresso(self):
-        cpf_para_transferir, evento, codigo_ingresso = self.__tela_comprador.pegar_dados_transferir_ingresso()
-        for ingresso in self.__controlador_principal.usuario_logado.meus_ingressos:
-            if ingresso.evento == evento and ingresso.codigo == codigo_ingresso:
-                ingresso_para_transferir = ingresso
-                self.__controlador_principal.usuario_logado.meus_ingressos.remove(ingresso_para_transferir)
-                comprador_para_transferir = self.retorna_comprador_e_senha_pelo_cpf(cpf_para_transferir)[0]
-                comprador_para_transferir.meus_ingressos.append(ingresso_para_transferir)
-
     def sair_da_conta(self):
         self.__tela_aberta = False
         self.__controlador_principal.deslogar()
@@ -109,5 +76,5 @@ class ControladorComprador:
                 evento.ingressos.remove(ingresso)
                 evento.ingressos_vendidos.append(ingresso)
                 self.__controlador_principal.usuario_logado.meus_ingressos.append(ingresso)
-        else:
+        if not ingresso:
             self.__tela_comprador.evento_nao_existe()
