@@ -59,3 +59,6 @@ class TelaPrincipal:
 
     def nao_existe_conta(self):
         print("Não existe uma conta cadastrada com esse CPF.")
+
+    def cpf_em_uso(self):
+        print("O cpf já está vinculado à outra conta")

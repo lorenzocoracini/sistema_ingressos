@@ -134,3 +134,7 @@ class ControladorProdutor:
     @property
     def eventos(self):
         return self.__eventos
+
+    @property
+    def produtores(self):
+        return self.__produtores
