@@ -55,8 +55,13 @@ class TelaComprador:
 
     def pegar_dados_para_favoritar_evento(self):
         print("Favoritar Evento")
-        codigo = int(input("Digite o cógido do evento a ser favoritado: "))
-        return codigo
+        while True:
+            try:
+                codigo = int(input("Digite o cógido do evento a ser favoritado: "))
+                return codigo
+                break
+            except ValueError:
+                self.deu_erro()
 
     def mostrar_eventos_favoritos(self, eventos_favoritos):
         for evento in eventos_favoritos:
@@ -83,3 +88,6 @@ class TelaComprador:
     def usuario_ja_existe(self):
         print("O usuário já existe, faça login com o cpf fornecido ou digite outro cpf.")
         self.__controlador_comprador.comprador_ja_existe()
+
+    def evento_nao_existe(self):
+        print("O evento inserido não existe.")

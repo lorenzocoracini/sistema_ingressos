@@ -72,6 +72,8 @@ class ControladorComprador:
         for evento in self.__controlador_principal.eventos_disponiveis:
             if evento.codigo == codigo_evento_para_favoritar:
                 self.__controlador_principal.usuario_logado.eventos_favoritos.append(evento)
+        else:
+            self.__tela_comprador.evento_nao_existe()
 
     def transferir_ingresso(self):
         cpf_para_transferir, evento, codigo_ingresso = self.__tela_comprador.pegar_dados_transferir_ingresso()
@@ -96,4 +98,5 @@ class ControladorComprador:
                 evento.ingressos.remove(ingresso)
                 evento.ingressos_vendidos.append(ingresso)
                 self.__controlador_principal.usuario_logado.meus_ingressos.append(ingresso)
-        return ingresso
+        else:
+            self.__tela_comprador.evento_nao_existe()
