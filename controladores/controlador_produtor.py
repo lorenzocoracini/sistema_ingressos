@@ -34,15 +34,7 @@ class ControladorProdutor:
         evento_a_ser_alterado.atracao = (dados_atualizados['atracao_evento'])
         evento_a_ser_alterado.despesas = (dados_atualizados['despesas_evento'])
 
-    def altera_dados_produtor(self):
-        dicionario_dados = {1: self.__controlador_principal.usuario_logado.nome,
-                            2: self.__controlador_principal.usuario_logado.cpf,
-                            3: self.__controlador_principal.usuario_logado.nascimento,
-                            4: self.__controlador_principal.usuario_logado.email,
-                            5: self.__controlador_principal.usuario_logado.celular,
-                            6: self.__controlador_principal.usuario_logado.senha}
-        num_do_dado, dado_a_ser_alterado = self.__tela_produtor.escolher_dado_para_alterar()
-        dicionario_dados[num_do_dado] = dado_a_ser_alterado
+
 
     def inclui_produtor(self, nome, cpf, nascimento, email, celular, senha):
         produtor = Produtor(nome, cpf, nascimento, email, celular, senha)

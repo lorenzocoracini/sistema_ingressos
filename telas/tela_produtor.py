@@ -1,7 +1,6 @@
 class TelaProdutor:
-    def __init__(self,controlador_produtor):
+    def __init__(self, controlador_produtor):
         self.__controlador_produtor = controlador_produtor
-
 
     def usuario_ja_existe(self):
         print("O usuário já existe, faça login com o cpf fornecido.")
@@ -25,7 +24,6 @@ class TelaProdutor:
             print("A opcão digitada não é válida, digite um número dentre as opcções abaixo")
             self.__controlador_produtor.escolher_acao()
 
-
     def alterar_evento(self):
         codigo_evento = int(input('Digite o código do evento que deseja editar:'))
         print("Preencha os dados atualizados:")
@@ -36,27 +34,11 @@ class TelaProdutor:
         atracao = str(input("ATRAÇÕES: "))
         despesas = int(input("DESPESAS: "))
 
-        dados_atualizados={'codigo_evento': codigo, 'data_evento': data, 'nome_evento': nome, 'descricao_evento': descricao,
-                           'atracao_evento': atracao, 'despesas_evento':despesas}
+        dados_atualizados = {'codigo_evento': codigo, 'data_evento': data, 'nome_evento': nome,
+                             'descricao_evento': descricao,
+                             'atracao_evento': atracao, 'despesas_evento': despesas}
 
-        return codigo_evento,dados_atualizados
-
-    def escolher_dado_para_alterar(self):
-        print("Escolha qual dado que deseja alterar:")
-        print("1 - Nome")
-        print("2 - CPF")
-        print("3 - Nascimento")
-        print("4 - Email")
-        print("5 - Celular")
-        print("6 - Senha")
-        opcao = int(input("Digite a opção desejada: "))
-        if opcao == 2 or opcao == 5:
-            dado_atualizado = int(input("Digite o dado atualizado: "))
-        elif opcao == 3:
-            dado_atualizado = input("Digite a data de  atualizado (dd/mm/aa): ")
-        else:
-            dado_atualizado = input("Digite o dado atualizado: ")
-        return opcao, dado_atualizado
+        return codigo_evento, dados_atualizados
 
     def remover_evento(self):
         print('Exclusão de evento')
