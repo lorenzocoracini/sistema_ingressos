@@ -24,20 +24,40 @@ class TelaProdutor:
             self.__controlador_produtor.escolher_acao()
 
     def alterar_evento(self):
-        codigo_evento = int(input('Digite o código do evento que deseja editar:'))
-        print("Preencha os dados atualizados:")
-        codigo = int(input('CODIGO: '))
-        data = str(input('DATA (dd/mm/aaaa hh:mm)'))
-        nome = str(input("NOME: "))
-        descricao = str(input("DESCRIÇÃO: "))
-        atracao = str(input("ATRAÇÕES: "))
-        despesas = int(input("DESPESAS: "))
+        while True:
+            try:
+                codigo_evento = int(input('Digite o código do evento que deseja editar:'))
+                print("Preencha os dados atualizados:")
+                codigo = int(input('CODIGO: '))
+                dia_evento = str(input('DIA DO EVENTO: '))
+                if int(dia_evento)> 31 or int(dia_evento)<= 0:
+                    raise ValueError
+                mes_evento = str(input('MÊS DO EVENTO: '))
+                if int(mes_evento)>12 or int(mes_evento)<=0:
+                    raise ValueError
+                ano_evento = str(input('ANO DO EVENTO: '))
+                if int(ano_evento)<=0:
+                    raise ValueError
+                hr_evento = str(input('HORA DO EVENTO (hora:minutos) : '))
+                lista = hr_evento.split(':')
+                if int(lista[0]) >23 or int(lista[0])<0 or int(lista[1])>59 or int(lista[1])<0:
+                    raise ValueError
+                nome = str(input("NOME: "))
+                descricao = str(input("DESCRIÇÃO: "))
+                atracao = str(input("ATRAÇÕES: "))
+                despesas = int(input("DESPESAS: "))
 
-        dados_atualizados = {'codigo_evento': codigo, 'data_evento': data, 'nome_evento': nome,
-                             'descricao_evento': descricao,
-                             'atracao_evento': atracao, 'despesas_evento': despesas}
+                dados_atualizados = {'codigo_evento': codigo,
+                                     'data_evento': f'{dia_evento}/{mes_evento}/{ano_evento} {hr_evento}',
+                                     'nome_evento': nome,
+                                     'descricao_evento': descricao,
+                                     'atracao_evento': atracao, 'despesas_evento': despesas}
+                return codigo_evento, dados_atualizados
 
-        return codigo_evento, dados_atualizados
+            except ValueError:
+                print('Dados preenchidos incorretamente')
+
+
 
     def remover_evento(self):
         print('Exclusão de evento')
