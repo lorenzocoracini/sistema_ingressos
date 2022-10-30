@@ -40,6 +40,7 @@ class ControladorPrincipal:
         comprador = self.__controlador_comprador.retorna_comprador_e_senha_pelo_cpf(dados_login["cpf"])
         produtor = self.__controlador_produtor.retorna_produtor_e_senha_pelo_cpf(dados_login["cpf"])
         if comprador:
+            print(comprador[0].senha)
             if dados_login["senha"] == comprador[1]:
                 self.__usuario_logado = comprador[0]
                 self.__tela_principal.acao_realizada()
@@ -48,6 +49,7 @@ class ControladorPrincipal:
                 self.__tela_principal.credenciais_incorretas()
 
         elif produtor:
+            print(produtor[0].senha)
             if dados_login["senha"] == produtor[1]:
                 self.__usuario_logado = produtor[0]
                 self.__tela_principal.acao_realizada()

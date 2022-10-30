@@ -3,7 +3,7 @@ class TelaComprador:
         self.__controlador_comprador = controlador_comprador
 
     def mostrar_opcoes_comprador(self):
-        print("*"*20)
+        print("*" * 20)
         print("1 - Ver meus ingressos")
         print("2 - Ver eventos disponíveis")
         print("3 - Ver eventos Favoritos")
@@ -22,7 +22,6 @@ class TelaComprador:
             print("A opcão digitada não é válida, digite um número dentre as opcções abaixo")
             self.__controlador_comprador.escolher_acao()
 
-
     def listar_dados_comprador(self, comprador_logado):
         print("Nome: ", comprador_logado.nome)
         print("CPF: ", comprador_logado.cpf)
@@ -31,23 +30,21 @@ class TelaComprador:
         print("Celular: ", comprador_logado.celular)
         print("Senha: ", comprador_logado.senha)
 
+    def editar_dados(self):
+        print("Digite os dados atualizados:")
+        nome = str(input("Nome: "))
+        cpf = int(input("CPF: "))
+        dia_nascimento = str(input("Dia de nascimento :"))
+        mes_nascimento = str(input("Mês do nascimento: "))
+        ano_nascimento = str(input("Ano do nascimento: "))
+        email = str(input("Email: "))
+        celular = int(input("Celular: "))
+        senha = int(input("Senha: "))
 
-    def escolher_dado_para_alterar(self):
-        print("Escolha qual dado quer alterar:")
-        print("1 - Nome")
-        print("2 - CPF")
-        print("3 - Nascimento")
-        print("4 - Email")
-        print("5 - Celular")
-        print("6 - Senha")
-        opcao = int(input("Digite a opção desejada: "))
-        if opcao == 2 or opcao == 5:
-            dado_atualizado = int(input("Digite o dado atualizado: "))
-        elif opcao == 3:
-            dado_atualizado = input("Digite o dado atualizado (dd/mm/aa): ")
-        else:
-            dado_atualizado = input("Digite o dado atualizado: ")
-        return opcao, dado_atualizado
+
+        dados_atualizados = {'nome': nome, 'cpf': cpf, "nascimento": f"{dia_nascimento}/{mes_nascimento}/{ano_nascimento}",
+                             'email': email, 'celular': celular, 'senha': senha}
+        return dados_atualizados
 
     def mostrar_meus_ingressos(self, ingressos):
         for ingresso in ingressos:
@@ -75,7 +72,7 @@ class TelaComprador:
         print("Dados para a tranferência de ingresso:")
         cpf = int(input("Digite o cpf da pessoa:"))
         nome_do_evento = input("Digite o nome do evento: ")
-        codigo_do_ingresso= int(input("Digite o código do ingresso a ser transferido: "))
+        codigo_do_ingresso = int(input("Digite o código do ingresso a ser transferido: "))
         return cpf, nome_do_evento, codigo_do_ingresso
 
     def pegar_evento_para_compra(self):

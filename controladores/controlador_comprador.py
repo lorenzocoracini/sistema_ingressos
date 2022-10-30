@@ -40,15 +40,26 @@ class ControladorComprador:
             opcoes[opcao]()
 
     def alterar_dados_comprador(self):
-        dicionario_dados = {1: self.__controlador_principal.usuario_logado.nome,
-                            2: self.__controlador_principal.usuario_logado.cpf,
-                            3: self.__controlador_principal.usuario_logado.nascimento,
-                            4: self.__controlador_principal.usuario_logado.email,
-                            5: self.__controlador_principal.usuario_logado.celular,
-                            6: self.__controlador_principal.usuario_logado.senha}
+        #mostra dados antigos
         self.__tela_comprador.listar_dados_comprador(self.__controlador_principal.usuario_logado)
-        num_do_dado, dado_a_ser_alterado = self.__tela_comprador.escolher_dado_para_alterar()
-        dicionario_dados[num_do_dado] = dado_a_ser_alterado
+
+        usuario = None
+        for comprador in self.__compradores:
+            if comprador.cpf == self.__controlador_principal.usuario_logado.cpf:
+                usuario = comprador
+
+
+        dados_atualizados = self.__tela_comprador.editar_dados()
+        usuario.nome = dados_atualizados['nome']
+        usuario.cpf = dados_atualizados['cpf']
+        usuario.nascimento = dados_atualizados['nascimento']
+        usuario.email = dados_atualizados['email']
+        usuario.celular = dados_atualizados['celular']
+        usuario.senha = dados_atualizados['senha']
+
+
+        #teste
+        self.__tela_comprador.listar_dados_comprador(self.__controlador_principal.usuario_logado)
 
 
     def excluir_comprador(self):
