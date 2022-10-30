@@ -1,4 +1,7 @@
 class TelaProdutor:
+    def __init__(self,controlador_produtor):
+        self.__controlador_produtor = controlador_produtor
+
 
     def usuario_ja_existe(self):
         print("O usuário já existe, faça login com o cpf fornecido.")
@@ -12,8 +15,16 @@ class TelaProdutor:
         print('6 - Histórico de eventos')
         print('7 - Excluir conta')
         print('8 - Sair da conta')
-        opcao = int(input('ESCOLHA A OPÇÃO: '))
-        return opcao
+        try:
+            opcao = int(input("Digite a opcao desejada:"))
+            if isinstance(opcao, int) and 1 <= opcao <= 8:
+                return opcao
+            else:
+                raise ValueError
+        except ValueError:
+            print("A opcão digitada não é válida, digite um número dentre as opcções abaixo")
+            self.__controlador_produtor.escolher_acao()
+
 
     def alterar_evento(self):
         print("Escolha dado que deseja alterar:")
