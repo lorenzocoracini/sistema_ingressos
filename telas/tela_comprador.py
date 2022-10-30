@@ -5,7 +5,7 @@ class TelaComprador:
         print("2 - Ver eventos disponíveis")
         print("3 - Ver eventos Favoritos")
         print("4 - Favoritar Evento")
-        print("5 - Transferir ingresso")
+        print("5 - Comprar Ingresso")
         print("6 - Editar meus dados")
         print("7 - Excluir Conta")
         print("8 - Sair da Conta")
@@ -66,3 +66,7 @@ class TelaComprador:
         nome_do_evento = input("Digite o nome do evento: ")
         codigo_do_ingresso= int(input("Digite o código do ingresso a ser transferido: "))
         return cpf, nome_do_evento, codigo_do_ingresso
+
+    def pegar_evento_para_compra(self):
+        evento = input('Digite o nome do evento que você deseja comprar: ')
+        return evento

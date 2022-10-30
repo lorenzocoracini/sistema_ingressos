@@ -15,6 +15,7 @@ class Evento:
         self.__despesas = depesas
         self.__local = local
         self.__ingressos = []
+        self.__ingressos_vendidos = []
 
     @property
     def codigo(self):
@@ -70,6 +71,9 @@ class Evento:
     def ingressos(self):
         return self.__ingressos
 
+    @ingressos.setter
+    def ingressos(self, ingressos):
+        self.__ingressos = ingressos
 
     @property
     def despesas(self):
@@ -89,3 +93,11 @@ class Evento:
     @local.setter
     def local(self, rua, bairro, cidade, cep, lotacao_maxima, aluguel):
         self.__local = Local(rua, bairro, cidade, cep, lotacao_maxima, aluguel)
+
+    @property
+    def ingressos_vendidos(self):
+        return self.__ingressos_vendidos
+
+    @ingressos_vendidos.setter
+    def ingressos_vendidos(self, ingressos):
+        self.__ingressos_vendidos = ingressos
