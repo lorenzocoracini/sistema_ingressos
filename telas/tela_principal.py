@@ -56,3 +56,6 @@ class TelaPrincipal:
 
     def credenciais_incorretas(self):
         print("A senha digitada não confere com o cpf.")
+
+    def nao_existe_conta(self):
+        print("Não existe uma conta cadastrada com esse CPF.")
