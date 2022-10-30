@@ -10,9 +10,8 @@ from telas.tela_ingresso import TelaIngresso
 
 
 class ControladorPrincipal:
-
     def __init__(self):
-        self.__tela_principal = TelaPrincipal()
+        self.__tela_principal = TelaPrincipal(self)
         self.__tela_ingresso = TelaIngresso()
         self.__controlador_evento = ControladorEvento()
         self.__controlador_ingressos = ContraladorIngressos()

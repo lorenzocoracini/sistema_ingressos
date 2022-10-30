@@ -81,4 +81,5 @@ class TelaComprador:
         print("Os dados fornecidos estão errados!")
 
     def usuario_ja_existe(self):
-        print("O usuário já existe, faça login com o cpf fornecido.")
+        print("O usuário já existe, faça login com o cpf fornecido ou digite outro cpf.")
+        self.__controlador_comprador.comprador_ja_existe()
