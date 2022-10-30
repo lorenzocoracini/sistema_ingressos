@@ -79,3 +79,7 @@ class ControladorComprador:
         if not ingresso:
             self.__tela_comprador.evento_nao_existe()
 
+    @property
+    def compradores(self):
+        return self.__compradores
+
