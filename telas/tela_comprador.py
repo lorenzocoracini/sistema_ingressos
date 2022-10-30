@@ -32,7 +32,8 @@ class TelaComprador:
 
     def mostrar_meus_ingressos(self, ingressos):
         for ingresso in ingressos:
-            print(ingresso)
+            print('Evento: ', ingresso.evento)
+            print('Valor: ', ingresso.valor)
 
     def pegar_dados_para_favoritar_evento(self):
         print("Favoritar Evento")
@@ -46,7 +47,10 @@ class TelaComprador:
 
     def mostrar_eventos_favoritos(self, eventos_favoritos):
         for evento in eventos_favoritos:
-            print(evento.nome)
+            print('Evento: ', evento.nome)
+            print('Código: ', evento.codigo)
+            print('Valor: ', evento.ingressos[0].valor)
+
 
     def mostrar_eventos_disponiveis(self, eventos_disponiveis):
         for evento in eventos_disponiveis:

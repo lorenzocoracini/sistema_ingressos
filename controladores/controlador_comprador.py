@@ -78,3 +78,4 @@ class ControladorComprador:
                 self.__controlador_principal.usuario_logado.meus_ingressos.append(ingresso)
         if not ingresso:
             self.__tela_comprador.evento_nao_existe()
+
