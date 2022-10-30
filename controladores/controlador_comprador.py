@@ -22,6 +22,9 @@ class ControladorComprador:
         except SystemError:
             self.__tela_comprador.usuario_ja_existe()
 
+    def comprador_ja_existe(self):
+        self.__controlador_principal.inicia()
+
     def retorna_comprador_e_senha_pelo_cpf(self, cpf):
         for comprador in self.__compradores:
             if comprador.cpf == cpf:
