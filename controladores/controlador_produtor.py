@@ -17,7 +17,6 @@ class ControladorProdutor:
         self.__controlador_principal = controlador_principal
         self.__tela_ingresso = TelaIngresso()
 
-
     def listar_eventos(self):
         self.__tela_produtor.mostar_eventos(self.__eventos)
 
@@ -29,7 +28,6 @@ class ControladorProdutor:
                 evento_a_ser_alterado = evento
 
         print(evento_a_ser_alterado)
-
 
         dicionario_dados = {1: evento_a_ser_alterado.codigo, 2: evento_a_ser_alterado.data,
                             3: evento_a_ser_alterado.nome, 4: evento_a_ser_alterado.descricao,
@@ -68,8 +66,9 @@ class ControladorProdutor:
 
     def escolher_acao(self):
         self.__tela_aberta = True
-        opcoes = {1: self.adicionar_evento, 2: self.listar_eventos, 3: self.editar_evento, 4: self.transferir_ingresso,
-                  5:self.remover_evento, 6: self.altera_dados_produtor, 7: self.exclui_produtor, 8: self.sair_da_conta}
+        opcoes = {1: self.adicionar_evento, 2: self.listar_eventos, 3: self.editar_evento,
+                  4: self.remover_evento, 5: self.altera_dados_produtor, 6: self.mostrar_historico_de_vendas,
+                  7: self.exclui_produtor, 8: self.sair_da_conta}
         while self.__tela_aberta:
             opcao = self.__tela_produtor.mostrar_opcoes_produtor()
             opcoes[opcao]()
@@ -102,6 +101,7 @@ class ControladorProdutor:
             self.__eventos.append(evento)
         lotacao = dados_evento['lotacao_maxima_evento']
         self.gerar_ingressos(lotacao)
+        self.incluir_no_historico_eventos(evento.nome, evento.data)
 
     def remover_evento(self):
         codigo = self.__tela_produtor.remover_evento()
@@ -109,8 +109,7 @@ class ControladorProdutor:
             if evento.codigo == codigo:
                 self.__eventos.remove(evento)
 
-
-    def gerar_ingressos(self,lotacao):
+    def gerar_ingressos(self, lotacao):
         dados = self.__tela_ingresso.pegar_dados()
         valor = dados['valor_do_ingresso']
         lote = dados['lote_do_ingresso']
@@ -130,15 +129,13 @@ class ControladorProdutor:
             if evento.nome == nome_evento:
                 evento.ingressos = ingressos
 
+    def incluir_no_historico_eventos(self, nome, data):
+        nome = nome
+        data = data
+        self.__controlador_principal.usuario_logado.historico_eventos.append({nome: data})
 
-    def transferir_ingresso(self):
-        pass
-
-    def adicionar_venda_historico_vendas(self):
-        pass
-
-    def adicionar_evento_historico_eventos(self):
-        pass
+    def mostrar_historico_de_vendas(self):
+        self.__tela_produtor.mostar_historico_de_eventos(self.__controlador_principal.usuario_logado.historico_eventos)
 
     def sair_da_conta(self):
         self.__tela_aberta = False

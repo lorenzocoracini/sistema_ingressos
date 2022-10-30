@@ -7,9 +7,9 @@ class TelaProdutor:
         print("1 - Adicionar evento")
         print("2- Ver meus eventos")
         print("3 - Editar evento")
-        print("4 - Transferir ingresso")
-        print('5 - Excluir evento')
-        print('6 - Editar meus dados')
+        print('4 - Excluir evento')
+        print('5 - Editar meus dados')
+        print('6 - Histórico de eventos')
         print('7 - Excluir conta')
         print('8 - Sair da conta')
         opcao = int(input('ESCOLHA A OPÇÃO: '))
@@ -33,9 +33,7 @@ class TelaProdutor:
             dado_atualizado = float(input('Digite as despesas atualizadas: '))
         else:
             dado_atualizado = input('Digite o dado atualizado')
-        return codigo_evento,opcao,dado_atualizado
-
-
+        return codigo_evento, opcao, dado_atualizado
 
     def escolher_dado_para_alterar(self):
         print("Escolha qual dado que deseja alterar:")
@@ -62,6 +60,14 @@ class TelaProdutor:
     def mostar_eventos(self, eventos):
         for evento in eventos:
             print(evento.nome)
+
+    def mostar_historico_de_eventos(self, eventos):
+        lista_eventos = eventos
+        print("Histórico de eventos")
+        for evento in lista_eventos:
+            for nome, data in evento.items():
+                print('NOME: ', nome)
+                print('DATA: ', data)
 
     def deu_erro(self):
         print('deu erro')
