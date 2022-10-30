@@ -57,8 +57,8 @@ class ControladorProdutor:
     def escolher_acao(self):
         self.__tela_aberta = True
         opcoes = {1: self.adicionar_evento, 2: self.listar_eventos, 3: self.editar_evento,
-                  4: self.remover_evento, 5: self.altera_dados_produtor, 6: self.mostrar_historico_de_vendas,
-                  7: self.exclui_produtor, 8: self.sair_da_conta}
+                  4: self.remover_evento, 5: self.mostrar_historico_de_vendas,
+                  6: self.exclui_produtor, 7: self.sair_da_conta}
         while self.__tela_aberta:
             opcao = self.__tela_produtor.mostrar_opcoes_produtor()
             opcoes[opcao]()

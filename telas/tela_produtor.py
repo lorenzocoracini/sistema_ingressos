@@ -10,13 +10,12 @@ class TelaProdutor:
         print("2- Ver meus eventos")
         print("3 - Editar evento")
         print('4 - Excluir evento')
-        print('5 - Editar meus dados')
-        print('6 - Histórico de eventos')
-        print('7 - Excluir conta')
-        print('8 - Sair da conta')
+        print('5 - Histórico de eventos')
+        print('6 - Excluir conta')
+        print('7 - Sair da conta')
         try:
             opcao = int(input("Digite a opcao desejada:"))
-            if isinstance(opcao, int) and 1 <= opcao <= 8:
+            if isinstance(opcao, int) and 1 <= opcao <= 7:
                 return opcao
             else:
                 raise ValueError
