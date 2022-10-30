@@ -1,4 +1,7 @@
 class TelaComprador:
+    def __init__(self, controlador_comprador):
+        self.__controlador_comprador = controlador_comprador
+
     def mostrar_opcoes_comprador(self):
         print("*"*20)
         print("1 - Ver meus ingressos")
@@ -9,19 +12,16 @@ class TelaComprador:
         print("6 - Editar meus dados")
         print("7 - Excluir Conta")
         print("8 - Sair da Conta")
-        while True:
-            try:
-                opcao = int(input("Digite a opcao desejada:"))
-                if isinstance(opcao, int) and 1 <= opcao <= 8:
-                    return opcao
-                    break
-                else:
-                    raise ValueError
-            except ValueError:
-                opcao = int(input("A opção digitada não é válida, favor digite novamente: "))
-                if isinstance(opcao, int) and 1 <= opcao <= 8:
-                    return opcao
-                    break
+        try:
+            opcao = int(input("Digite a opcao desejada:"))
+            if isinstance(opcao, int) and 1 <= opcao <= 8:
+                return opcao
+            else:
+                raise ValueError
+        except ValueError:
+            print("A opcão digitada não é válida, digite um número dentre as opcções abaixo")
+            self.__controlador_comprador.escolher_acao()
+
 
     def listar_dados_comprador(self, comprador_logado):
         print("Nome: ", comprador_logado.nome)
