@@ -147,5 +147,7 @@ class ControladorProdutor:
             datetime.datetime(int(ano), int(mes), int(dia), int(hora_formatada[0]), int(hora_formatada[1]))
         except ValueError:
             esta_certa = False
+        except IndexError:
+            esta_certa = False
         return esta_certa
 

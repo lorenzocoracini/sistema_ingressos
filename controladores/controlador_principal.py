@@ -98,7 +98,7 @@ class ControladorPrincipal:
     def atualizar_eventos_disponiveis(self):
         self.__eventos_disponiveis = []
         for evento in self.__controlador_produtor.eventos:
-            if evento.data >= datetime.datetime.today():
+            if evento.data.date() >= datetime.datetime.today().date():
                 self.__eventos_disponiveis.append(evento)
 
     def verificar_data(self, dia, mes, ano):

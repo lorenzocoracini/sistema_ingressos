@@ -33,7 +33,8 @@ class ControladorComprador:
     def escolher_acao(self):
         self.__tela_aberta = True
         opcoes = {1: self.ver_meus_ingressos, 2: self.ver_eventos_disponiveis,3: self.ver_eventos_favoritos,
-                  4: self.favoritar_evento, 5: self.remover_evento_favoritos, 6: self.comprar_ingresso, 7: self.excluir_comprador, 8: self.sair_da_conta}
+                  4: self.favoritar_evento, 5: self.remover_evento_favoritos, 6: self.comprar_ingresso,
+                  7: self.excluir_comprador, 8: self.sair_da_conta}
         while self.__tela_aberta:
             opcao = self.__tela_comprador.mostrar_opcoes_comprador()
             opcoes[opcao]()
@@ -55,9 +56,12 @@ class ControladorComprador:
 
     def favoritar_evento(self):
         codigo_evento_para_favoritar = self.__tela_comprador.pegar_dados_para_favoritar_evento()
+        evento_para_favoritar = None
         for evento in self.__controlador_principal.eventos_disponiveis:
             if evento.codigo == codigo_evento_para_favoritar:
-                self.__controlador_principal.usuario_logado.eventos_favoritos.append(evento)
+                evento_para_favoritar = evento
+        if evento_para_favoritar:
+            self.__controlador_principal.usuario_logado.eventos_favoritos.append(evento)
         else:
             self.__tela_comprador.evento_nao_existe()
 
@@ -80,9 +84,12 @@ class ControladorComprador:
 
     def remover_evento_favoritos(self):
         codigo_para_remover = self.__tela_comprador.pega_evento_remover_favoritos()
+        evento_para_ser_removido = None
         for evento in self.__controlador_principal.usuario_logado.eventos_favoritos:
             if evento.codigo == codigo_para_remover:
-                self.__controlador_principal.usuario_logado.eventos_favoritos.remove(evento)
+                evento_para_ser_removido = evento
+        if evento_para_ser_removido:
+            self.__controlador_principal.usuario_logado.eventos_favoritos.remove(evento_para_ser_removido)
         else:
             self.__tela_comprador.evento_nao_existe()
 

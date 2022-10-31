@@ -34,17 +34,10 @@ class TelaProdutor:
                 print("Preencha os dados atualizados:")
                 codigo = int(input('CODIGO: '))
                 dia_evento = str(input('DIA DO EVENTO: '))
-                if int(dia_evento)> 31 or int(dia_evento)<= 0:
-                    raise ValueError
                 mes_evento = str(input('MÊS DO EVENTO: '))
-                if int(mes_evento)>12 or int(mes_evento)<=0:
-                    raise ValueError
                 ano_evento = str(input('ANO DO EVENTO: '))
-                if int(ano_evento)<=0:
-                    raise ValueError
                 hr_evento = str(input('HORA DO EVENTO (hora:minutos) : '))
-                lista = hr_evento.split(':')
-                if int(lista[0]) >23 or int(lista[0])<0 or int(lista[1])>59 or int(lista[1])<0:
+                if not self.__controlador_produtor.verifica_data(dia_evento, mes_evento, ano_evento, hr_evento):
                     raise ValueError
                 nome = str(input("NOME: "))
                 descricao = str(input("DESCRIÇÃO: "))

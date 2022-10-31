@@ -57,6 +57,7 @@ class TelaComprador:
         for evento in eventos_disponiveis:
             print("*"*20)
             print("Nome: ", evento.nome)
+            print("Código: ", evento.codigo)
             print("Data: ",evento.data)
             print("Descrição: ", evento.descricao)
             print("Atrações: ", evento.atracao)
