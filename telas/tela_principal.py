@@ -19,18 +19,18 @@ class TelaPrincipal:
             self.__controlador_principal.inicia()
 
     def mostra_tela_cadastro(self):
+        print("*" * 20)
         print("Digite seus dados:")
+        print("*" * 20)
         while True:
             try:
                 self.__nome = input("Nome: ")
                 self.__cpf = int(input("CPF (Coloque apenas números):  "))
                 dia_nascimento = int(input("Digite o dia do seu nascimento: "))
-                if dia_nascimento <= 0 or dia_nascimento > 31:
-                    raise ValueError
                 mes_nascimento = int(input("Digite o número correspondente ao mês do seu nascimento: "))
-                if mes_nascimento > 12 or mes_nascimento <= 0:
-                    raise ValueError
                 ano_nascimento = int(input("Digite o ano do seu nascimento: "))
+                if not self.__controlador_principal.verificar_data(dia_nascimento, mes_nascimento, ano_nascimento):
+                    raise ValueError
                 self.__email = input("Email: ")
                 self.__celular = int(input("Celular (Coloque apenas números): "))
                 self.__senha = input("Senha:")
@@ -42,7 +42,9 @@ class TelaPrincipal:
                 print("Dados errados, favor inserir os dados segundo as instruções.")
 
     def mostrar_tela_login(self):
+        print("*" * 20)
         print("Digite seus dados:")
+        print("*" * 20)
         while True:
             try:
                 self.__cpf_login = int(input("CPF: "))

@@ -14,7 +14,9 @@ class TelaProdutor:
         print('6 - Excluir conta')
         print('7 - Sair da conta')
         try:
+            print("*" * 20)
             opcao = int(input("Digite a opcao desejada:"))
+            print("*" * 20)
             if isinstance(opcao, int) and 1 <= opcao <= 7:
                 return opcao
             else:
@@ -26,7 +28,9 @@ class TelaProdutor:
     def alterar_evento(self):
         while True:
             try:
+                print("*" * 20)
                 codigo_evento = int(input('Digite o código do evento que deseja editar:'))
+                print("*" * 20)
                 print("Preencha os dados atualizados:")
                 codigo = int(input('CODIGO: '))
                 dia_evento = str(input('DIA DO EVENTO: '))
@@ -66,16 +70,23 @@ class TelaProdutor:
 
     def mostar_eventos(self, eventos):
         for evento in eventos:
-            print(evento.nome)
+            print("*"*20)
+            print("NOME:", evento.nome)
+            print("CÓDIGO: ", evento.codigo)
+
 
     def mostar_historico_de_eventos(self, eventos):
         lista_eventos = eventos
         print("Histórico de eventos")
         for evento in lista_eventos:
             for nome, data in evento.items():
+                print("*" * 20)
                 print('NOME: ', nome)
                 print('DATA: ', data)
 
     def deu_erro(self):
         print('deu erro')
+
+    def evento_nao_existe(self):
+        print("O evento fornecido não existe!")
 

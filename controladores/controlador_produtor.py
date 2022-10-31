@@ -5,6 +5,7 @@ from telas.tela_produtor import TelaProdutor
 from telas.tela_evento import TelaEvento
 from entidades.ingresso import Ingresso
 from telas.tela_ingresso import TelaIngresso
+import datetime
 
 
 class ControladorProdutor:
@@ -26,13 +27,15 @@ class ControladorProdutor:
         for evento in self.__eventos:
             if evento.codigo == codigo_evento:
                 evento_a_ser_alterado = evento
-
-        evento_a_ser_alterado.codigo = (dados_atualizados['codigo_evento'])
-        evento_a_ser_alterado.data = (dados_atualizados['data_evento'])
-        evento_a_ser_alterado.nome = (dados_atualizados['nome_evento'])
-        evento_a_ser_alterado.descricao = (dados_atualizados['descricao_evento'])
-        evento_a_ser_alterado.atracao = (dados_atualizados['atracao_evento'])
-        evento_a_ser_alterado.despesas = (dados_atualizados['despesas_evento'])
+        if evento_a_ser_alterado:
+            evento_a_ser_alterado.codigo = (dados_atualizados['codigo_evento'])
+            evento_a_ser_alterado.data = (dados_atualizados['data_evento'])
+            evento_a_ser_alterado.nome = (dados_atualizados['nome_evento'])
+            evento_a_ser_alterado.descricao = (dados_atualizados['descricao_evento'])
+            evento_a_ser_alterado.atracao = (dados_atualizados['atracao_evento'])
+            evento_a_ser_alterado.despesas = (dados_atualizados['despesas_evento'])
+        else:
+            self.__tela_produtor.evento_nao_existe()
 
 
 
@@ -86,24 +89,30 @@ class ControladorProdutor:
                         dados_evento['descricao_evento'], dados_evento['atracao_evento'],
                         dados_evento['despesas_evento'],
                         local)
+        lotacao = dados_evento['lotacao_maxima_evento']
+        nome_evento = dados_evento['nome_evento']
+        self.gerar_ingressos(lotacao, nome_evento)
+        self.incluir_no_historico_eventos(evento.nome, evento.data)
 
         if not self.retorna_evento_pelo_codigo(evento.codigo):
             self.__eventos.append(evento)
-        lotacao = dados_evento['lotacao_maxima_evento']
-        self.gerar_ingressos(lotacao)
-        self.incluir_no_historico_eventos(evento.nome, evento.data)
+        else:
+            self.__tela_evento.evento_ja_existe()
+
 
     def remover_evento(self):
         codigo = self.__tela_produtor.remover_evento()
         for evento in self.__eventos:
             if evento.codigo == codigo:
                 self.__eventos.remove(evento)
+            else:
+                self.__tela_produtor.evento_nao_existe()
 
-    def gerar_ingressos(self, lotacao):
+    def gerar_ingressos(self, lotacao, nome_evento):
         dados = self.__tela_ingresso.pegar_dados()
         valor = dados['valor_do_ingresso']
         lote = dados['lote_do_ingresso']
-        evento = dados['evento_do_ingresso']
+        evento = nome_evento
         lotacao = lotacao
         quantidade_de_ingressos = 0
         ingressos = []
@@ -137,4 +146,14 @@ class ControladorProdutor:
         return self.__produtores
 
     def mostrar_historico_eventos(self):
-        self.__tela_produtor.mostar_historico_de_eventos()
+        self.__tela_produtor.mostar_historico_de_eventos(self.__controlador_principal.usuario_logado.historico_eventos)
+
+    def verifica_data(self, dia, mes, ano, hora):
+        hora_formatada = hora.split(":")
+        esta_certa = True
+        try:
+            datetime.datetime(int(ano), int(mes), int(dia), int(hora_formatada[0]), int(hora_formatada[1]))
+        except ValueError:
+            esta_certa = False
+        return esta_certa
+

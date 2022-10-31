@@ -33,7 +33,7 @@ class ControladorComprador:
     def escolher_acao(self):
         self.__tela_aberta = True
         opcoes = {1: self.ver_meus_ingressos, 2: self.ver_eventos_disponiveis,3: self.ver_eventos_favoritos,
-                  4: self.favoritar_evento, 5: self.comprar_ingresso, 6: self.excluir_comprador, 7: self.sair_da_conta}
+                  4: self.favoritar_evento, 5: self.remover_evento_favoritos, 6: self.comprar_ingresso, 7: self.excluir_comprador, 8: self.sair_da_conta}
         while self.__tela_aberta:
             opcao = self.__tela_comprador.mostrar_opcoes_comprador()
             opcoes[opcao]()
@@ -78,6 +78,9 @@ class ControladorComprador:
                 self.__controlador_principal.usuario_logado.meus_ingressos.append(ingresso)
         if not ingresso:
             self.__tela_comprador.evento_nao_existe()
+
+    def remover_evento_favoritos(self):
+        pass
 
     @property
     def compradores(self):

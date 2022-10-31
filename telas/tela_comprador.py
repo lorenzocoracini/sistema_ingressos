@@ -8,9 +8,10 @@ class TelaComprador:
         print("2 - Ver eventos disponíveis")
         print("3 - Ver eventos Favoritos")
         print("4 - Favoritar Evento")
-        print("5 - Comprar Ingresso")
-        print("6 - Excluir Conta")
-        print("7 - Sair da Conta")
+        print("5 - Remover evento dos favoritos")
+        print("6 - Comprar Ingresso")
+        print("7 - Excluir Conta")
+        print("8 - Sair da Conta")
         try:
             opcao = int(input("Digite a opcao desejada:"))
             if isinstance(opcao, int) and 1 <= opcao <= 7:
@@ -54,14 +55,12 @@ class TelaComprador:
 
     def mostrar_eventos_disponiveis(self, eventos_disponiveis):
         for evento in eventos_disponiveis:
-            print(evento.nome)
-
-    def pegar_dados_transferir_ingresso(self):
-        print("Dados para a tranferência de ingresso:")
-        cpf = int(input("Digite o cpf da pessoa:"))
-        nome_do_evento = input("Digite o nome do evento: ")
-        codigo_do_ingresso = int(input("Digite o código do ingresso a ser transferido: "))
-        return cpf, nome_do_evento, codigo_do_ingresso
+            print("*"*20)
+            print("Nome: ", evento.nome)
+            print("Data: ",evento.data)
+            print("Descrição: ", evento.descricao)
+            print("Atrações: ", evento.atracao)
+            print("Valor do ingresso: ", evento.ingressos[0].valor)
 
     def pegar_evento_para_compra(self):
         evento = input('Digite o nome do evento que você deseja comprar: ')

@@ -101,3 +101,10 @@ class ControladorPrincipal:
             if evento.data >= datetime.datetime.today():
                 self.__eventos_disponiveis.append(evento)
 
+    def verificar_data(self, dia, mes, ano):
+        esta_correta = True
+        try:
+            datetime.datetime(ano,mes,dia)
+        except ValueError:
+            esta_correta = False
+        return esta_correta
