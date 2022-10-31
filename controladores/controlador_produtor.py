@@ -90,8 +90,7 @@ class ControladorProdutor:
                         dados_evento['despesas_evento'],
                         local)
         lotacao = dados_evento['lotacao_maxima_evento']
-        nome_evento = dados_evento['nome_evento']
-        self.gerar_ingressos(lotacao, nome_evento)
+        self.gerar_ingressos(lotacao, evento)
         self.incluir_no_historico_eventos(evento.nome, evento.data)
 
         if not self.retorna_evento_pelo_codigo(evento.codigo):
@@ -108,25 +107,18 @@ class ControladorProdutor:
             else:
                 self.__tela_produtor.evento_nao_existe()
 
-    def gerar_ingressos(self, lotacao, nome_evento):
+    def gerar_ingressos(self, lotacao, evento):
         dados = self.__tela_ingresso.pegar_dados()
         valor = dados['valor_do_ingresso']
         lote = dados['lote_do_ingresso']
-        evento = nome_evento
+        nome_evento = evento.nome
         lotacao = lotacao
         quantidade_de_ingressos = 0
-        ingressos = []
 
         while quantidade_de_ingressos < lotacao:
-            ingresso_novo = Ingresso(valor, quantidade_de_ingressos, lote, evento)
+            ingresso_novo = Ingresso(valor, quantidade_de_ingressos, lote, nome_evento)
             quantidade_de_ingressos += 1
-            ingressos.append(ingresso_novo)
-        self.adicionar_ingressos_em_evento(ingressos, evento)
-
-    def adicionar_ingressos_em_evento(self, ingressos, nome_evento):
-        for evento in self.__eventos:
-            if evento.nome == nome_evento:
-                evento.ingressos = ingressos
+            evento.ingressos.append(ingresso_novo)
 
     def incluir_no_historico_eventos(self, nome, data):
         nome = nome
