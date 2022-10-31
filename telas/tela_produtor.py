@@ -79,5 +79,3 @@ class TelaProdutor:
     def deu_erro(self):
         print('deu erro')
 
-    def listar_dados_produtor(self):
-        pass

@@ -57,7 +57,7 @@ class ControladorProdutor:
     def escolher_acao(self):
         self.__tela_aberta = True
         opcoes = {1: self.adicionar_evento, 2: self.listar_eventos, 3: self.editar_evento,
-                  4: self.remover_evento, 5: self.mostrar_historico_de_vendas,
+                  4: self.remover_evento, 5: self.mostrar_historico_eventos,
                   6: self.exclui_produtor, 7: self.sair_da_conta}
         while self.__tela_aberta:
             opcao = self.__tela_produtor.mostrar_opcoes_produtor()
@@ -124,9 +124,6 @@ class ControladorProdutor:
         data = data
         self.__controlador_principal.usuario_logado.historico_eventos.append({nome: data})
 
-    def mostrar_historico_de_vendas(self):
-        self.__tela_produtor.mostar_historico_de_eventos(self.__controlador_principal.usuario_logado.historico_eventos)
-
     def sair_da_conta(self):
         self.__tela_aberta = False
         self.__controlador_principal.deslogar()
@@ -138,3 +135,6 @@ class ControladorProdutor:
     @property
     def produtores(self):
         return self.__produtores
+
+    def mostrar_historico_eventos(self):
+        self.__tela_produtor.mostar_historico_de_eventos()
