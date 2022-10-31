@@ -40,7 +40,6 @@ class ControladorComprador:
 
     def excluir_comprador(self):
         usuario_para_excluir = self.__controlador_principal.usuario_logado
-        print(usuario_para_excluir)
         self.__compradores.remove(usuario_para_excluir)
         self.sair_da_conta()
 
@@ -80,7 +79,12 @@ class ControladorComprador:
             self.__tela_comprador.evento_nao_existe()
 
     def remover_evento_favoritos(self):
-        pass
+        codigo_para_remover = self.__tela_comprador.pega_evento_remover_favoritos()
+        for evento in self.__controlador_principal.usuario_logado.eventos_favoritos:
+            if evento.codigo == codigo_para_remover:
+                self.__controlador_principal.usuario_logado.eventos_favoritos.remove(evento)
+        else:
+            self.__tela_comprador.evento_nao_existe()
 
     @property
     def compradores(self):

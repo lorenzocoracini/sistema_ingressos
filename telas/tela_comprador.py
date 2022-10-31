@@ -14,7 +14,7 @@ class TelaComprador:
         print("8 - Sair da Conta")
         try:
             opcao = int(input("Digite a opcao desejada:"))
-            if isinstance(opcao, int) and 1 <= opcao <= 7:
+            if isinstance(opcao, int) and 1 <= opcao <= 8:
                 return opcao
             else:
                 raise ValueError
@@ -65,6 +65,15 @@ class TelaComprador:
     def pegar_evento_para_compra(self):
         evento = input('Digite o nome do evento que você deseja comprar: ')
         return evento
+
+    def pega_evento_remover_favoritos(self):
+        while True:
+            try:
+                codigo = int(input("Digite o código do evento que deseja remover dos favoritos:"))
+                return codigo
+                break
+            except ValueError:
+                print("O código fornecido não é válido")
 
     def deu_erro(self):
         print("Os dados fornecidos estão errados!")
