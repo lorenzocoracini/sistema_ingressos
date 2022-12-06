@@ -1,3 +1,37 @@
+import PySimpleGUI as sg
+
+
+class TelaProdutor2:
+    def __init__(self):
+        self.__window = None
+        self.init_components()
+
+    def init_components(self):
+        sg.ChangeLookAndFeel('Material2')
+        layout = [
+            [sg.Text('Área do produtor', size=(40, 2))],
+            [sg.Button('Adicionar evento')],
+            [sg.Button('Ver meus eventos')],
+            [sg.Button('Editar meus eventos')],
+            [sg.Button('Excluir meus eventos')],
+            [sg.Button('Histórico de eventos')],
+            [sg.Button('Excluir conta')],
+            [sg.Button('Sair da conta')],
+        ]
+
+        self.__window = sg.Window('Sistema de Ingressos').Layout(layout)
+
+    def open(self):
+        button, values = self.__window.Read()
+        return button, values
+
+    def close(self):
+        self.__window.Close()
+
+
+TelaProdutor2().open()
+
+
 class TelaProdutor:
     def __init__(self, controlador_produtor):
         self.__controlador_produtor = controlador_produtor
@@ -54,8 +88,6 @@ class TelaProdutor:
             except ValueError:
                 print('Dados preenchidos incorretamente')
 
-
-
     def remover_evento(self):
         print('Exclusão de evento')
         codigo = int(input("Digite o código do evento a ser excluído:"))
@@ -63,10 +95,9 @@ class TelaProdutor:
 
     def mostar_eventos(self, eventos):
         for evento in eventos:
-            print("*"*20)
+            print("*" * 20)
             print("NOME:", evento.nome)
             print("CÓDIGO: ", evento.codigo)
-
 
     def mostar_historico_de_eventos(self, eventos):
         lista_eventos = eventos
@@ -82,4 +113,3 @@ class TelaProdutor:
 
     def evento_nao_existe(self):
         print("O evento fornecido não existe!")
-
