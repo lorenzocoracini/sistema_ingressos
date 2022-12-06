@@ -1,6 +1,6 @@
 import PySimpleGUI as sg
 
-
+'''
 class TelaPrincipal2:
     def __init__(self):
         self.__window = None
@@ -71,7 +71,7 @@ class TelaPrincipal2:
 
 TelaPrincipal2().open()
 
-
+'''
 class TelaPrincipal:
     def __init__(self, controlador_principal):
         self.__controlador_principal = controlador_principal

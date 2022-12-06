@@ -1,6 +1,6 @@
 import PySimpleGUI as sg
 
-
+'''
 class TelaProdutor2:
     def __init__(self):
         self.__window = None
@@ -31,7 +31,7 @@ class TelaProdutor2:
 
 TelaProdutor2().open()
 
-
+'''
 class TelaProdutor:
     def __init__(self, controlador_produtor):
         self.__controlador_produtor = controlador_produtor

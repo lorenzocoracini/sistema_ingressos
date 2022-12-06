@@ -24,8 +24,8 @@ class ControladorPrincipal:
     def cadastro_novo_usuario(self):
         dados = self.__tela_principal.mostra_tela_cadastro()
         if dados["tipo_cadastro"] == 2:
-            for comprador in self.__controlador_comprador.compradores:
-                if comprador.cpf == dados["cpf"]:
+            for produtor in self.__controlador_produtor.produtores:
+                if produtor.cpf == dados["cpf"]:
                     self.__tela_principal.cpf_em_uso()
             else:
                 self.__usuario_logado = self.__controlador_produtor.inclui_produtor(dados["nome"], dados["cpf"], dados["nascimento"],
@@ -33,8 +33,8 @@ class ControladorPrincipal:
                 self.__tela_principal.acao_realizada()
                 self.__controlador_produtor.escolher_acao()
         elif dados["tipo_cadastro"] == 1:
-            for produtor in self.__controlador_produtor.produtores:
-                if produtor.cpf == dados["cpf"]:
+            for comprador in self.__controlador_comprador.compradores:
+                if comprador.cpf == dados["cpf"]:
                     self.__tela_principal.cpf_em_uso()
             else:
                 self.__usuario_logado = self.__controlador_comprador.inclui_comprador(dados["nome"], dados["cpf"], dados["nascimento"],
