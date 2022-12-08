@@ -1,11 +1,8 @@
 class Local:
-    def __init__(self, rua:str, bairro:str, cidade:str, cep:int, lotacao_maxima:int, aluguel:float):
+    def __init__(self, rua:str, cep:int, lotacao_maxima:int):
         self.__rua = rua
-        self.__bairro = bairro
-        self.__cidade = cidade
         self.__cep = cep
         self.__lotacao_maxima = lotacao_maxima
-        self.__aluguel = aluguel
 
     @property
     def rua(self):
@@ -14,22 +11,6 @@ class Local:
     @rua.setter
     def rua(self, nova_rua):
         self.__rua = nova_rua
-
-    @property
-    def bairro(self):
-        return self.__bairro
-
-    @bairro.setter
-    def bairro(self,novo_bairro):
-        self.__bairro = novo_bairro
-
-    @property
-    def cidade(self):
-        return self.__cidade
-
-    @cidade.setter
-    def cidade(self,nova_cidade):
-        self.__cidade = nova_cidade
 
     @property
     def cep(self):
@@ -46,12 +27,3 @@ class Local:
     @lotacao_maxima.setter
     def lotacao_maxima(self,nova_lotacao_maxima):
         self.__lotacao_maxima = nova_lotacao_maxima
-
-    @property
-    def aluguel(self):
-        return self.__aluguel
-
-    @aluguel.setter
-    def aluguel(self, novo_aluguel):
-        self.__aluguel = novo_aluguel
-

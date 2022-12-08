@@ -4,10 +4,9 @@ from datetime import datetime
 
 class Usuario(ABC):
     @abstractmethod
-    def __init__(self, nome: str, cpf: int, nascimento: str, email: str, celular: int, senha: str):
+    def __init__(self, nome: str, cpf: int, email: str, celular: int, senha: str):
         self.__nome = nome
         self.__cpf = cpf
-        self.__nascimento = datetime.strptime(nascimento, "%d/%m/%Y")
         self.__email = email
         self.__celular = celular
         self.__senha = senha
@@ -27,14 +26,6 @@ class Usuario(ABC):
     @cpf.setter
     def cpf(self, cpf):
         self.__cpf = cpf
-
-    @property
-    def nascimento(self):
-        return self.__nascimento
-
-    @nascimento.setter
-    def nascimento(self, nascimento):
-        self.__nascimento = nascimento
 
     @property
     def email(self):

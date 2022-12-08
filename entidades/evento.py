@@ -2,22 +2,17 @@ from entidades.local import Local
 from datetime import datetime
 
 
-
-# https://www.programiz.com/python-programming/datetime
 class Evento:
     def __init__(self, codigo: int, data: str, nome: str, descricao: str, atracao: str,
-                 depesas: float, local:Local):
+                 local:Local):
         self.__codigo = codigo
         self.__data = datetime.strptime(data, "%d/%m/%Y %H:%M")
         self.__nome = nome
         self.__descricao = descricao
         self.__atracao = atracao
-        self.__despesas = depesas
         self.__local = local
         self.__ingressos = []
         self.__ingressos_vendidos = []
-
-
 
 
     @property
@@ -79,23 +74,12 @@ class Evento:
         self.__ingressos = ingressos
 
     @property
-    def despesas(self):
-        return self.__despesas
-
-
-    @despesas.setter
-    def despesas(self, novas_despesas):
-        self.__despesas = novas_despesas
-
-
-    @property
     def local(self):
         return self.__local
 
-
     @local.setter
-    def local(self, rua, bairro, cidade, cep, lotacao_maxima, aluguel):
-        self.__local = Local(rua, bairro, cidade, cep, lotacao_maxima, aluguel)
+    def local(self, rua, cep, lotacao_maxima):
+        self.__local = Local(rua, cep, lotacao_maxima)
 
     @property
     def ingressos_vendidos(self):

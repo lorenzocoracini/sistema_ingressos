@@ -3,20 +3,16 @@ class TelaIngresso:
     def pegar_dados(self):
         print('DADOS INGRESSOS')
         valor = float(input('Digite o valor do ingresso: '))
-        lote = int(input('Digite o lote do ingresso: '))
-        return {'valor_do_ingresso': valor,
-                'lote_do_ingresso': lote}
+        return {'valor_do_ingresso': valor}
 
     def alterar_ingresso(self):
         nome = str(input('Digite o nome do evento dos ingressos que deseja altera:'))
         print('DIGITE OS NOVOS DADOS PARA O INGRESSO:')
         valor = float(input('Digite o  valor do ingresso: '))
-        lote = int(input('Digite o  lote do ingresso: '))
         codigo = int(input('Digite o o código do ingresso: '))
         evento = input('Digite o evento do ingresso: ')
         return {'nome':nome,
                 'valor_do_ingresso': valor,
-                'lote_do_ingresso': lote,
                 'codigo_do_ingresso':codigo,
                 'evento_do_ingresso': evento}
 

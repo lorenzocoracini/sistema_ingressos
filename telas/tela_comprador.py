@@ -1,6 +1,6 @@
 import PySimpleGUI as sg
 
-
+'''
 class TelaComprador2:
     def __init__(self):
         self.__window = None
@@ -31,36 +31,37 @@ class TelaComprador2:
 
 
 TelaComprador2().open()
-
+'''
 
 class TelaComprador:
     def __init__(self, controlador_comprador):
         self.__controlador_comprador = controlador_comprador
 
     def mostrar_opcoes_comprador(self):
-        print("*" * 20)
-        print("1 - Ver meus ingressos")
-        print("2 - Ver eventos disponíveis")
-        print("3 - Ver eventos Favoritos")
-        print("4 - Favoritar Evento")
-        print("5 - Remover evento dos favoritos")
-        print("6 - Comprar Ingresso")
-        print("7 - Excluir Conta")
-        print("8 - Sair da Conta")
-        try:
-            opcao = int(input("Digite a opcao desejada:"))
-            if isinstance(opcao, int) and 1 <= opcao <= 8:
-                return opcao
-            else:
-                raise ValueError
-        except ValueError:
-            print("A opcão digitada não é válida, digite um número dentre as opcções abaixo")
-            self.__controlador_comprador.escolher_acao()
+        retornou = False
+        while not retornou:
+            print("*" * 20)
+            print("1 - Ver meus ingressos")
+            print("2 - Ver eventos disponíveis")
+            print("3 - Ver eventos Favoritos")
+            print("4 - Favoritar Evento")
+            print("5 - Remover evento dos favoritos")
+            print("6 - Comprar Ingresso")
+            print("7 - Excluir Conta")
+            print("8 - Sair da Conta")
+            try:
+                opcao = int(input("Digite a opcao desejada:"))
+                if isinstance(opcao, int) and 1 <= opcao <= 8:
+                    retornou = True
+                    return opcao
+                else:
+                    raise ValueError
+            except ValueError:
+                print("A opcão digitada não é válida, digite um número dentre as opcções abaixo")
 
     def listar_dados_comprador(self, comprador_logado):
         print("Nome: ", comprador_logado.nome)
         print("CPF: ", comprador_logado.cpf)
-        print("Nascimento: ", comprador_logado.nascimento)
         print("Email: ", comprador_logado.email)
         print("Celular: ", comprador_logado.celular)
         print("Senha: ", comprador_logado.senha)
@@ -76,7 +77,6 @@ class TelaComprador:
             try:
                 codigo = int(input("Digite o cógido do evento a ser favoritado: "))
                 return codigo
-                break
             except ValueError:
                 self.deu_erro()
 

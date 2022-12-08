@@ -11,7 +11,7 @@ class ContraladorIngressos:
 
     def adicionar_ingresso(self):
         valor,lote,evento = self.__tela_ingresso.pegar_dados()
-        ingresso = Ingresso(valor, self.__codigo, lote, evento)
+        ingresso = Ingresso(valor, self.__codigo, evento)
         self.__codigo+=1
         try:
             for i in self.__ingressos:
@@ -30,14 +30,13 @@ class ContraladorIngressos:
                 return ingresso
 
     def alterar_ingresso(self):
-        nome,valor,lote,codigo,evento = self.__tela_ingresso.alterar_ingresso()
+        nome,valor,codigo,evento = self.__tela_ingresso.alterar_ingresso()
         ing = None
         for ingresso in self.__ingressos:
             if ingresso.evento == nome:
                 ing = ingresso
         ing.valor = valor
         ing.codigo = codigo
-        ing.lote = lote
         ing.evento = evento
 
     def excluir_ingresso(self):

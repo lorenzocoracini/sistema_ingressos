@@ -9,8 +9,8 @@ class ControladorComprador:
         self.__controlador_principal = controlador_principal
         self.__tela_aberta = False
 
-    def inclui_comprador(self, nome, cpf, nascimento, email, celular, senha):
-        comprador = Comprador(nome, cpf, nascimento, email, celular, senha)
+    def inclui_comprador(self, nome, cpf, email, celular, senha):
+        comprador = Comprador(nome, cpf, email, celular, senha)
         try:
             for i in self.__compradores:
                 if comprador.cpf == i.cpf:
@@ -37,6 +37,7 @@ class ControladorComprador:
                   7: self.excluir_comprador, 8: self.sair_da_conta}
         while self.__tela_aberta:
             opcao = self.__tela_comprador.mostrar_opcoes_comprador()
+            print(opcao)
             opcoes[opcao]()
 
     def excluir_comprador(self):
@@ -61,7 +62,7 @@ class ControladorComprador:
             if evento.codigo == codigo_evento_para_favoritar:
                 evento_para_favoritar = evento
         if evento_para_favoritar:
-            self.__controlador_principal.usuario_logado.eventos_favoritos.append(evento)
+            self.__controlador_principal.usuario_logado.eventos_favoritos.append(evento_para_favoritar)
         else:
             self.__tela_comprador.evento_nao_existe()
 

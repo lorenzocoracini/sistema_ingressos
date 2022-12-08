@@ -1,5 +1,5 @@
 import PySimpleGUI as sg
-
+'''
 
 class TelaPrincipal2:
     def __init__(self):
@@ -70,7 +70,7 @@ class TelaPrincipal2:
 
 
 TelaPrincipal2().open()
-
+'''
 
 class TelaPrincipal:
     def __init__(self, controlador_principal):
@@ -100,17 +100,11 @@ class TelaPrincipal:
             try:
                 self.__nome = input("Nome: ")
                 self.__cpf = int(input("CPF (Coloque apenas números):  "))
-                dia_nascimento = int(input("Digite o dia do seu nascimento: "))
-                mes_nascimento = int(input("Digite o número correspondente ao mês do seu nascimento: "))
-                ano_nascimento = int(input("Digite o ano do seu nascimento: "))
-                if not self.__controlador_principal.verificar_data(dia_nascimento, mes_nascimento, ano_nascimento):
-                    raise ValueError
                 self.__email = input("Email: ")
                 self.__celular = int(input("Celular (Coloque apenas números): "))
                 self.__senha = input("Senha:")
                 self.__tipo = int(input("Forma de cadastro (Digite o número: 1 - Comprador ou 2 - Produtor): "))
                 return {"nome": self.__nome, "cpf": self.__cpf,
-                        "nascimento": f"{dia_nascimento}/{mes_nascimento}/{ano_nascimento}",
                         "email": self.__email, "celular": self.__celular, "senha": self.__senha,
                         "tipo_cadastro": self.__tipo}
 

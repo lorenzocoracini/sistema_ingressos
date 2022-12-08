@@ -33,14 +33,13 @@ class ControladorProdutor:
             evento_a_ser_alterado.nome = (dados_atualizados['nome_evento'])
             evento_a_ser_alterado.descricao = (dados_atualizados['descricao_evento'])
             evento_a_ser_alterado.atracao = (dados_atualizados['atracao_evento'])
-            evento_a_ser_alterado.despesas = (dados_atualizados['despesas_evento'])
         else:
             self.__tela_produtor.evento_nao_existe()
 
 
 
-    def inclui_produtor(self, nome, cpf, nascimento, email, celular, senha):
-        produtor = Produtor(nome, cpf, nascimento, email, celular, senha)
+    def inclui_produtor(self, nome, cpf, email, celular, senha):
+        produtor = Produtor(nome, cpf, email, celular, senha)
         try:
             for i in self.__produtores:
                 if produtor.cpf == i.cpf:
@@ -81,13 +80,11 @@ class ControladorProdutor:
 
     def adicionar_evento(self):
         dados_evento = self.__tela_evento.pegar_dados()
-        local = Local(dados_evento['rua_evento'], dados_evento['bairro_evento'],
-                      dados_evento['cidade_evento'], dados_evento['cep_evento'],
-                      dados_evento['lotacao_maxima_evento'], dados_evento['aluguel_evento'])
+        local = Local(dados_evento['rua_evento'], dados_evento['cep_evento'],
+                      dados_evento['lotacao_maxima_evento'])
 
         evento = Evento(dados_evento['codigo_evento'], dados_evento['data_evento'], dados_evento['nome_evento'],
                         dados_evento['descricao_evento'], dados_evento['atracao_evento'],
-                        dados_evento['despesas_evento'],
                         local)
         lotacao = dados_evento['lotacao_maxima_evento']
         self.gerar_ingressos(lotacao, evento)
@@ -110,13 +107,12 @@ class ControladorProdutor:
     def gerar_ingressos(self, lotacao, evento):
         dados = self.__tela_ingresso.pegar_dados()
         valor = dados['valor_do_ingresso']
-        lote = dados['lote_do_ingresso']
         nome_evento = evento.nome
         lotacao = lotacao
         quantidade_de_ingressos = 0
 
         while quantidade_de_ingressos < lotacao:
-            ingresso_novo = Ingresso(valor, quantidade_de_ingressos, lote, nome_evento)
+            ingresso_novo = Ingresso(valor, quantidade_de_ingressos, nome_evento)
             quantidade_de_ingressos += 1
             evento.ingressos.append(ingresso_novo)
 

@@ -28,7 +28,7 @@ class ControladorPrincipal:
                 if comprador.cpf == dados["cpf"]:
                     self.__tela_principal.cpf_em_uso()
             else:
-                self.__usuario_logado = self.__controlador_produtor.inclui_produtor(dados["nome"], dados["cpf"], dados["nascimento"],
+                self.__usuario_logado = self.__controlador_produtor.inclui_produtor(dados["nome"], dados["cpf"],
                                                       dados["email"], dados["celular"], dados["senha"])
                 self.__tela_principal.acao_realizada()
                 self.__controlador_produtor.escolher_acao()
@@ -37,7 +37,7 @@ class ControladorPrincipal:
                 if produtor.cpf == dados["cpf"]:
                     self.__tela_principal.cpf_em_uso()
             else:
-                self.__usuario_logado = self.__controlador_comprador.inclui_comprador(dados["nome"], dados["cpf"], dados["nascimento"],
+                self.__usuario_logado = self.__controlador_comprador.inclui_comprador(dados["nome"], dados["cpf"],
                                                           dados["email"], dados["celular"], dados["senha"])
                 self.__tela_principal.acao_realizada()
                 self.__controlador_comprador.escolher_acao()

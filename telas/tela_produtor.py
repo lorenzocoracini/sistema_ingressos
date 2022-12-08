@@ -1,6 +1,6 @@
 import PySimpleGUI as sg
 
-
+'''
 class TelaProdutor2:
     def __init__(self):
         self.__window = None
@@ -31,7 +31,7 @@ class TelaProdutor2:
 
 TelaProdutor2().open()
 
-
+'''
 class TelaProdutor:
     def __init__(self, controlador_produtor):
         self.__controlador_produtor = controlador_produtor
@@ -40,24 +40,26 @@ class TelaProdutor:
         print("O usuário já existe, faça login com o cpf fornecido.")
 
     def mostrar_opcoes_produtor(self):
-        print("1 - Adicionar evento")
-        print("2- Ver meus eventos")
-        print("3 - Editar evento")
-        print('4 - Excluir evento')
-        print('5 - Histórico de eventos')
-        print('6 - Excluir conta')
-        print('7 - Sair da conta')
-        try:
-            print("*" * 20)
-            opcao = int(input("Digite a opcao desejada:"))
-            print("*" * 20)
-            if isinstance(opcao, int) and 1 <= opcao <= 7:
-                return opcao
-            else:
-                raise ValueError
-        except ValueError:
-            print("A opcão digitada não é válida, digite um número dentre as opcções abaixo")
-            self.__controlador_produtor.escolher_acao()
+        retornou = False
+        while not retornou:
+            print("1 - Adicionar evento")
+            print("2- Ver meus eventos")
+            print("3 - Editar evento")
+            print('4 - Excluir evento')
+            print('5 - Histórico de eventos')
+            print('6 - Excluir conta')
+            print('7 - Sair da conta')
+            try:
+                print("*" * 20)
+                opcao = int(input("Digite a opcao desejada:"))
+                print("*" * 20)
+                if isinstance(opcao, int) and 1 <= opcao <= 7:
+                    retornou = True
+                    return opcao
+                else:
+                    raise ValueError
+            except ValueError:
+                print("A opcão digitada não é válida, digite um número dentre as opcções abaixo")
 
     def alterar_evento(self):
         while True:
@@ -76,13 +78,12 @@ class TelaProdutor:
                 nome = str(input("NOME: "))
                 descricao = str(input("DESCRIÇÃO: "))
                 atracao = str(input("ATRAÇÕES: "))
-                despesas = int(input("DESPESAS: "))
 
                 dados_atualizados = {'codigo_evento': codigo,
                                      'data_evento': f'{dia_evento}/{mes_evento}/{ano_evento} {hr_evento}',
                                      'nome_evento': nome,
                                      'descricao_evento': descricao,
-                                     'atracao_evento': atracao, 'despesas_evento': despesas}
+                                     'atracao_evento': atracao}
                 return codigo_evento, dados_atualizados
 
             except ValueError:

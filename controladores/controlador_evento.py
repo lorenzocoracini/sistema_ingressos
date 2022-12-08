@@ -11,13 +11,11 @@ class ControladorEvento:
 
     def adicionar_evento(self):
         dados_evento = self.__tela_evento.pegar_dados()
-        local = Local(dados_evento['rua_evento'], dados_evento['bairro_evento'],
-                      dados_evento['cidade_evento'], dados_evento['cep_evento'],
-                      dados_evento['lotacao_maxima_evento'], dados_evento['aluguel_evento'])
+        local = Local(dados_evento['rua_evento'], dados_evento['cep_evento'],
+                      dados_evento['lotacao_maxima_evento'])
 
         evento = Evento(dados_evento['codigo_evento'], dados_evento['data_evento'], dados_evento['nome_evento'],
                         dados_evento['descricao_evento'], dados_evento['atracao_evento'],
-                        dados_evento['despesas_evento'],
                         local)
         if evento not in self.__eventos:
             self.__eventos.append(evento)
@@ -34,7 +32,6 @@ class ControladorEvento:
             evento_a_ser_alterado.nome = (dados_atualizados['nome_evento'])
             evento_a_ser_alterado.descricao = (dados_atualizados['descricao_evento'])
             evento_a_ser_alterado.atracao = (dados_atualizados['atracao_evento'])
-            evento_a_ser_alterado.despesas = (dados_atualizados['despesas_evento'])
 
     def excluir_evento(self):
         codigo = self.__tela_evento.remover_evento()

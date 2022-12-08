@@ -15,19 +15,14 @@ class TelaEvento:
                 raise ValueError
             descricao = str(input("DESCRIÇÃO: "))
             atracao = str(input("ATRAÇÕES: "))
-            despesas = int(input("DESPESAS: "))
             rua = str(input("RUA DO LOCAL: "))
-            bairro = str(input("BAIRRO DO LOCAL: "))
-            cidade = str(input("CIDADE DO LOCAL: "))
             cep = int((input("CEP DO LOCAL: ")))
             lotacao_maxima = int(input("LOTAÇÃO MÁXIMA: "))
-            aluguel = float(input("ALUGUEL DO LOCAL: "))
 
             return {'codigo_evento': codigo, 'data_evento': f'{dia_evento}/{mes_evento}/{ano_evento} {hr_evento}',
                     'nome_evento': nome, 'descricao_evento': descricao,
-                    'atracao_evento': atracao, 'despesas_evento': despesas, 'rua_evento': rua, 'bairro_evento': bairro,
-                    'cidade_evento': cidade, 'cep_evento': cep, 'lotacao_maxima_evento': lotacao_maxima,
-                    'aluguel_evento': aluguel}
+                    'atracao_evento': atracao, 'rua_evento': rua,
+                    'cep_evento': cep, 'lotacao_maxima_evento': lotacao_maxima}
 
         except ValueError:
             print('Dados incorretos , preencha novamente de acordo com as instruções')
@@ -60,13 +55,11 @@ class TelaEvento:
                 nome = str(input("NOME: "))
                 descricao = str(input("DESCRIÇÃO: "))
                 atracao = str(input("ATRAÇÕES: "))
-                despesas = int(input("DESPESAS: "))
-
                 dados_atualizados = {'codigo_evento': codigo,
                                      'data_evento': f'{dia_evento}/{mes_evento}/{ano_evento} {hr_evento}',
                                      'nome_evento': nome,
                                      'descricao_evento': descricao,
-                                     'atracao_evento': atracao, 'despesas_evento': despesas}
+                                     'atracao_evento': atracao}
 
                 return codigo_evento, dados_atualizados
 
