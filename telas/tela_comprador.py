@@ -1,38 +1,5 @@
 import PySimpleGUI as sg
 
-'''
-class TelaComprador2:
-    def __init__(self):
-        self.__window = None
-        self.init_components()
-
-    def init_components(self):
-        sg.ChangeLookAndFeel('Material2')
-        layout = [
-            [sg.Text('Área do Comprador', size=(40, 2))],
-            [sg.Button('Ver meus ingressos')],
-            [sg.Button('Ver eventos disponíveis')],
-            [sg.Button('Ver eventos favoritos')],
-            [sg.Button('Favoritar evento')],
-            [sg.Button('Remover evento dos favoritos')],
-            [sg.Button('Comprar ingresso')],
-            [sg.Button('Excluir conta')],
-            [sg.Button('Sair da conta')],
-        ]
-
-        self.__window = sg.Window('Sistema de Ingressos').Layout(layout)
-
-    def open(self):
-        button, values = self.__window.Read()
-        return button, values
-
-    def close(self):
-        self.__window.Close()
-
-
-TelaComprador2().open()
-'''
-
 class TelaComprador:
     def __init__(self, controlador_comprador):
         self.__controlador_comprador = controlador_comprador
