@@ -1,78 +1,141 @@
+import PySimpleGUI as sg
+from datetime import datetime
+
+
 class TelaEvento:
-    def __init__(self, controlador_produtor):
-        self.__contolador_produtor = controlador_produtor
+    def __init__(self):
+        self.__window = None
 
-    def pegar_dados(self):
-        print("CADASTRO EVENTO")
+    def adiciona_evento(self):
+        sg.ChangeLookAndFeel('Material2')
+        layout = [
+            [sg.Text("Cadastro de eventos")],
+            [sg.Text("Digite os dados do evento:")],
+            [sg.Text("Código", size=(15, 1)), sg.InputText(key='input_codigo')],
+            [sg.Text("Dia do evento", size=(15, 1)), sg.InputText(key='input_dia_evento')],
+            [sg.Text("Mes do evento", size=(15, 1)), sg.InputText(key='input_mes_evento')],
+            [sg.Text("Ano do evento", size=(15, 1)), sg.InputText(key='input_ano_evento')],
+            [sg.Text("Nome", size=(15, 1)), sg.InputText(key='input_nome')],
+            [sg.Text("Rua do Local", size=(15, 1)), sg.InputText(key='input_rua')],
+            [sg.Text("Cep", size=(15, 1)), sg.InputText(key='input_cep')],
+            [sg.Text("Lotação", size=(15, 1)), sg.InputText(key='input_lotacao')],
+            [sg.Text("Valor do ingresso", size=(15, 1)), sg.InputText(key='input_valor')],
+            [sg.Submit(), sg.Cancel()]
+        ]
+
+        self.__window = sg.Window('tickets.com').layout(layout)
+        button, values = self.__window.read()
+        self.close()
+
+        # tratamento de dados
+        codigo = values["input_codigo"]
+        dia = values["input_dia_evento"]
+        mes = values["input_mes_evento"]
+        ano = values["input_ano_evento"]
+        nome = values["input_nome"]
+        rua = values["input_rua"]
+        cep = values["input_cep"]
+        lotacao = values["input_lotacao"]
+        valor = values["input_valor"]
+
         try:
-            codigo = int(input('CODIGO: '))
-            nome = str(input("NOME: "))
-            dia_evento = str(input('DIA DO EVENTO: '))
-            mes_evento = str(input('MÊS DO EVENTO: '))
-            ano_evento = str(input('ANO DO EVENTO: '))
-            hr_evento = str(input('HORA DO EVENTO (hora:minutos) : '))
-            if not self.__contolador_produtor.verifica_data(dia_evento, mes_evento, ano_evento, hr_evento):
+            data = f"{dia}/{mes}/{ano}"
+            if button == "Cancel":
+                return button, values, data
+            elif button == "Submit" and (codigo == "" or dia == "" or mes == "" or ano == "" or nome == "" or rua == "" or
+                                         cep == "" or lotacao == "" or valor == ""):
                 raise ValueError
-            descricao = str(input("DESCRIÇÃO: "))
-            atracao = str(input("ATRAÇÕES: "))
-            rua = str(input("RUA DO LOCAL: "))
-            cep = int((input("CEP DO LOCAL: ")))
-            lotacao_maxima = int(input("LOTAÇÃO MÁXIMA: "))
+            elif button == "Submit" and ((not codigo.isdigit()) or (not cep.isdigit()) or (not lotacao.isdigit()) or
+                                         (not valor.isdigit()) or (not dia.isdigit()) or (not mes.isdigit()) or
+                                         (not ano.isdigit())):
+                raise ValueError
 
-            return {'codigo_evento': codigo, 'data_evento': f'{dia_evento}/{mes_evento}/{ano_evento} {hr_evento}',
-                    'nome_evento': nome, 'descricao_evento': descricao,
-                    'atracao_evento': atracao, 'rua_evento': rua,
-                    'cep_evento': cep, 'lotacao_maxima_evento': lotacao_maxima}
-
+            else:
+                data_atualizada = datetime.strptime(data, "%d/%m/%Y")
+                return button, values, data_atualizada
         except ValueError:
-            print('Dados incorretos , preencha novamente de acordo com as instruções')
-            self.__contolador_produtor.adicionar_evento()
-
-    def evento_ja_existe(self):
-        print("O código inserido já está sendo utilizado em outro evento, favor mudar o código!")
+            return None, None, None
 
     def alterar_evento(self):
-        while True:
-            try:
-                print("*" * 20)
-                codigo_evento = int(input('Digite o código do evento que deseja editar:'))
-                print("*" * 20)
-                print("Preencha os dados atualizados:")
-                codigo = int(input('CODIGO: '))
-                dia_evento = str(input('DIA DO EVENTO: '))
-                if int(dia_evento)> 31 or int(dia_evento)<= 0:
-                    raise ValueError
-                mes_evento = str(input('MÊS DO EVENTO: '))
-                if int(mes_evento)>12 or int(mes_evento)<=0:
-                    raise ValueError
-                ano_evento = str(input('ANO DO EVENTO: '))
-                if int(ano_evento)<=0:
-                    raise ValueError
-                hr_evento = str(input('HORA DO EVENTO (hora:minutos) : '))
-                lista = hr_evento.split(':')
-                if int(lista[0]) >23 or int(lista[0])<0 or int(lista[1])>59 or int(lista[1])<0:
-                    raise ValueError
-                nome = str(input("NOME: "))
-                descricao = str(input("DESCRIÇÃO: "))
-                atracao = str(input("ATRAÇÕES: "))
-                dados_atualizados = {'codigo_evento': codigo,
-                                     'data_evento': f'{dia_evento}/{mes_evento}/{ano_evento} {hr_evento}',
-                                     'nome_evento': nome,
-                                     'descricao_evento': descricao,
-                                     'atracao_evento': atracao}
+        sg.ChangeLookAndFeel('Material2')
+        layout = [
+            [sg.Text("Edição de evento")],
+            [sg.Text("Digite o código do evento que deseja editar"), sg.InputText(key='input_codigo_pra_alterar')],
+            [sg.Text("Digite os dados atualizados:")],
+            [sg.Text("Código", size=(15, 1)), sg.InputText(key='input_codigo')],
+            [sg.Text("Dia do evento", size=(15, 1)), sg.InputText(key='input_dia_evento')],
+            [sg.Text("Mes do evento", size=(15, 1)), sg.InputText(key='input_mes_evento')],
+            [sg.Text("Ano do evento", size=(15, 1)), sg.InputText(key='input_ano_evento')],
+            [sg.Text("Nome do evento", size=(15, 1)), sg.InputText(key='input_nome')],
+            [sg.Submit(), sg.Cancel()]
+        ]
 
-                return codigo_evento, dados_atualizados
+        self.__window = sg.Window('tickets.com').layout(layout)
+        button, values = self.__window.read()
+        self.close()
 
-            except ValueError:
-                print('Dados preenchidos incorretamente')
+        # tratamento de dados
+        codigo_para_alterar = values["input_codigo_pra_alterar"]
+        codigo = values["input_codigo"]
+        dia = values["input_dia_evento"]
+        mes = values["input_mes_evento"]
+        ano = values["input_ano_evento"]
+        nome = values["input_nome"]
+
+        try:
+            data = f"{dia}/{mes}/{ano}"
+            if button == "Cancel":
+                return button, values, data
+            elif button == "Submit" and (codigo_para_alterar == "" or codigo == "" or dia == "" or mes == "" or
+                                       ano == "" or nome == ""):
+                raise ValueError
+            elif button == "Submit" and ((not codigo.isdigit()) or (not dia.isdigit()) or (not mes.isdigit()) or
+                                         (not ano.isdigit()) or (not codigo_para_alterar.isdigit())):
+                raise ValueError
+            else:
+                data_atualizada = datetime.strptime(data, "%d/%m/%Y")
+                return button, values, data_atualizada
+        except ValueError:
+            return None, None, None
 
     def remover_evento(self):
-        print('Exclusão de evento')
-        codigo = int(input("Digite o código do evento a ser excluído:"))
-        return codigo
+        sg.ChangeLookAndFeel('Material2')
+        layout = [
+            [sg.Text("Exclusão de evento")],
+            [sg.Text("Digite o código do evento que deseja editar"), sg.InputText(key='input_codigo')],
+            [sg.Submit(), sg.Cancel()]
+        ]
 
-    def mostar_eventos(self, eventos):
+        self.__window = sg.Window('tickets.com').layout(layout)
+        button, values = self.__window.read()
+        self.close()
+
+        # tratamento de dados
+        codigo = values["input_codigo"]
+
+        try:
+            if button == "Submit" and codigo == "":
+                raise ValueError
+            elif button == "Submit" and (not codigo.isdigit()):
+                raise ValueError
+            else:
+                return button, values
+        except ValueError:
+            return None, None
+
+    def mostrar_eventos(self, eventos):
+        string_todos_eventos = ''
         for evento in eventos:
-            print("*"*20)
-            print("NOME:", evento.nome)
-            print("CÓDIGO: ", evento.codigo)
+            string_todos_eventos += evento[0]
+            string_todos_eventos += ', código: '
+            string_todos_eventos += evento[1]
+            string_todos_eventos += ', R$'
+            string_todos_eventos += evento[2]
+            string_todos_eventos += '\n'
+        sg.popup('-----LISTA DE EVENTOS-----', string_todos_eventos)
+
+    def mostra_mensagem(self, msg):
+        sg.popup("", msg)
+
+    def close(self):
+        self.__window.Close()
