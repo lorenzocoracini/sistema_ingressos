@@ -1,6 +1,3 @@
-from entidades.comprador import Comprador
-
-
 class Ingresso:
     def __init__(self, valor: float, codigo: int, evento: str):
         self.__valor = valor
@@ -39,4 +36,3 @@ class Ingresso:
     @comprador.setter
     def comprador(self, novo_comprador):
         self.__comprador = novo_comprador
-
