@@ -1,100 +1,117 @@
-from entidades.comprador import Comprador
-from telas.tela_comprador import TelaComprador
-from exceptions.cpfEmUsoException import CpfEmUsoException
+from datetime import datetime
+from telas.tela_evento import TelaEvento
+from entidades.evento import Evento
+from entidades.local import Local
+from exceptions.codigoEmUsoException import CodigoEmUsoException
+from exceptions.codigoNotFoundException import CodigoNotFoundException
 
 
-class ControladorComprador:
-    def __init__(self, controlador_principal, controlador_evento, controlador_ingressos):
-        self.__controlador_principal = controlador_principal
-        self.__controlador_evento = controlador_evento
+class ControladorEvento:
+    def __init__(self, controlador_ingressos):
+        self.__eventos = []
+        self.__tela_evento = TelaEvento()
         self.__controlador_ingressos = controlador_ingressos
-        self.__compradores = []
-        self.__tela_comprador = TelaComprador()
 
     @property
-    def compradores(self):
-        return self.__compradores
+    def eventos(self):
+        return self.__eventos
 
-    def inclui_comprador(self, values):
-        nome = values['input_nome']
-        cpf = values['input_cpf']
-        email = values['input_email']
-        celular = values['input_celular']
-        senha = values['input_senha']
-
-        comprador = Comprador(nome, cpf, email, celular, senha)
-
-        try:
-            for i in self.__compradores:
-                if comprador.cpf == i.cpf:
-                    raise CpfEmUsoException()
-            else:
-                self.__compradores.append(comprador)
-                self.__controlador_principal.altera_usuario_logado(comprador)
-                self.mostrar_opcoes_comprador()
-
-                return comprador
-        except CpfEmUsoException:
-            self.__tela_comprador.mostra_mensagem("O cpf fornecido está vinculado a outra conta. Tente Novamente.")
-
-    def mostrar_opcoes_comprador(self):
-        button, values = self.__tela_comprador.mostrar_opcoes()
-        opcoes = {'Ver meus ingressos': self.ver_meus_ingressos,
-                  'Ver eventos disponíveis': self.ver_eventos_disponiveis,
-                  'Comprar ingresso': self.comprar_ingresso,
-                  'Excluir conta': self.excluir_comprador,
-                  'Sair da conta': self.sair_da_conta}
-        opcoes[button]()
-
-    def comprar_ingresso(self):
+    def adicionar_evento(self):
         deu_certo = False
-        self.__controlador_evento.listar_eventos()
         while not deu_certo:
-            button, codigo_evento = self.__tela_comprador.pega_dados_para_compra_ingresso()
-            if button is None and codigo_evento is None:
-                self.__tela_comprador.mostra_mensagem("O formato de código inserido não é válido. "
-                                                      "Insira um número válido e tente novamente.")
-            elif button == "Cancel":
-                self.mostrar_opcoes_comprador()
+
+            button, dados_evento, data = self.__tela_evento.adiciona_evento()
+            if button == "Cancel":
+                return None
+            elif button is None and dados_evento is None:
+                self.__tela_evento.mostra_mensagem("Os dados inseridos estão incorretos, favor preencher novamente.")
             else:
-                deu_certo = True
-                ingresso = None
-                for evento in self.__controlador_evento.eventos:
-                    if codigo_evento["input_codigo_evento"] == evento.codigo:
-                        if len(evento.ingressos) > 0:
-                            ingresso = evento.ingressos[0]
-                            evento.ingressos.remove(ingresso)
-                            evento.ingressos_vendidos.append(ingresso)
-                            self.__controlador_principal.usuario_logado.meus_ingressos.append(ingresso)
-                            self.__tela_comprador.mostra_mensagem("Ingresso comprado com sucesso!")
-                            self.mostrar_opcoes_comprador()
+                try:
+                    deu_certo = True
+                    local = Local(dados_evento['input_rua'], dados_evento['input_cep'], dados_evento['input_lotacao'])
+                    evento = Evento(dados_evento['input_codigo'], data, dados_evento['input_nome'], local)
 
-                        else:
-                            self.__tela_comprador.mostra_mensagem("Os ingressos para o evento fornecido estão esgotados")
-                            self.mostrar_opcoes_comprador()
-                if not ingresso:
-                    self.__tela_comprador.mostra_mensagem("O código de evento fornecido não existe")
-                    self.mostrar_opcoes_comprador()
+                    if not self.retorna_evento_pelo_codigo(evento.codigo):
+                        self.__eventos.append(evento)
+                        ingresso_gerados = self.__controlador_ingressos.gerar_ingressos(dados_evento["input_lotacao"],
+                                                                                        evento,
+                                                                                        dados_evento["input_valor"])
 
-    def ver_meus_ingressos(self):
-        self.__controlador_ingressos.listar_ingressos()
-        self.mostrar_opcoes_comprador()
+                        evento.ingressos = ingresso_gerados
+                        return evento
 
-    def ver_eventos_disponiveis(self):
-        self.__controlador_evento.listar_eventos()
-        self.mostrar_opcoes_comprador()
+                    else:
+                        raise CodigoEmUsoException
+                except CodigoEmUsoException:
+                    self.__tela_evento.mostra_mensagem('Codigo de evento ja cadastrado')
 
-    def excluir_comprador(self):
-        usuario_para_excluir = self.__controlador_principal.usuario_logado
-        self.__compradores.remove(usuario_para_excluir)
-        self.sair_da_conta()
+    def listar_eventos_de_um_produtor(self, eventos):
+        self.__tela_evento.mostrar_eventos(eventos)
 
-    def sair_da_conta(self):
-        self.__controlador_principal.altera_usuario_logado(None)
-        self.__controlador_principal.inicializa_sistema()
+    def listar_eventos(self):
+        eventos = []
+        for evento in self.__eventos:
+            if len(evento.ingressos) > 0 and evento.data >= datetime.today():
+                eventos.append([evento.nome, evento.codigo, evento.ingressos[0].valor])
+            else:
+                continue
+        self.__tela_evento.mostrar_eventos(eventos)
 
-    def retorna_comprador_pelo_cpf(self, cpf):
-        for comprador in self.__compradores:
-            if comprador.cpf == cpf:
-                return comprador
+    def retorna_evento_pelo_codigo(self, codigo):
+        for evento in self.__eventos:
+            if evento.codigo == codigo:
+                return evento
         return None
+
+    def editar_evento(self):
+        deu_certo = False
+        self.listar_eventos()
+        while not deu_certo:
+            button, dados_atualizados, data = self.__tela_evento.alterar_evento()
+            if button == "Cancel":
+                break
+            elif button is None and dados_atualizados is None:
+                self.__tela_evento.mostra_mensagem("Os dados inseridos estão incorretos, favor preencher novamente.")
+            else:
+                try:
+                    deu_certo = True
+                    evento_a_ser_alterado = None
+                    for evento in self.__eventos:
+                        if evento.codigo == dados_atualizados["input_codigo_pra_alterar"]:
+                            evento_a_ser_alterado = evento
+
+                    if evento_a_ser_alterado:
+                        evento_a_ser_alterado.codigo = (dados_atualizados['input_codigo'])
+                        evento_a_ser_alterado.data = data
+                        evento_a_ser_alterado.nome = (dados_atualizados['input_nome'])
+                    else:
+                        raise CodigoNotFoundException
+                except CodigoNotFoundException:
+                    self.__tela_evento.mostra_mensagem(
+                        "Não existe um evento com o código inserido, favor tente novamente.")
+
+    def remover_evento(self):
+        deu_certo = False
+        self.listar_eventos()
+        while not deu_certo:
+            button, values = self.__tela_evento.remover_evento()
+
+            if button == "Cancel":
+                break
+            elif button is None and values is None:
+                self.__tela_evento.mostra_mensagem("Os dados inseridos estão incorretos, favor preencher novamente.")
+            else:
+                try:
+                    codigo_evento_para_ser_excluido = values['input_codigo']
+                    if not self.retorna_evento_pelo_codigo(codigo_evento_para_ser_excluido):
+                        raise CodigoNotFoundException
+                    else:
+                        deu_certo = True
+                        evento = self.retorna_evento_pelo_codigo(codigo_evento_para_ser_excluido)
+                        self.__eventos.remove(evento)
+                        self.__tela_evento.mostra_mensagem('Evento excluído com sucesso!')
+                        return evento
+                except CodigoNotFoundException:
+                    self.__tela_evento.mostra_mensagem(
+                        'Não existe um evento com o código inserido, favor tente novamente.')
+                    return None
