@@ -1,8 +1,9 @@
 class Local:
-    def __init__(self, rua:str, cep:int, lotacao_maxima:int):
+    def __init__(self, rua: str, cep: int, lotacao_maxima: int):
         self.__rua = rua
         self.__cep = cep
         self.__lotacao_maxima = lotacao_maxima
+
 
     @property
     def rua(self):
