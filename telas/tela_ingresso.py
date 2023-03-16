@@ -1,30 +1,20 @@
+import PySimpleGUI as sg
+
+
 class TelaIngresso:
+    def __init__(self):
+        self.__window = None
 
-    def pegar_dados(self):
-        print('DADOS INGRESSOS')
-        valor = float(input('Digite o valor do ingresso: '))
-        return {'valor_do_ingresso': valor}
+    def mostrar_ingressos(self, ingressos):
+        string_ingressos = ''
+        for ingresso in ingressos:
+            string_ingressos += ingresso[0]
+            string_ingressos += ', código: '
+            string_ingressos += str(ingresso[1])
+            string_ingressos += ', R$'
+            string_ingressos += str(ingresso[2])
+            string_ingressos += '\n'
+        sg.popup('-----MEUS INGRESSOS-----', string_ingressos)
 
-    def alterar_ingresso(self):
-        nome = str(input('Digite o nome do evento dos ingressos que deseja altera:'))
-        print('DIGITE OS NOVOS DADOS PARA O INGRESSO:')
-        valor = float(input('Digite o  valor do ingresso: '))
-        codigo = int(input('Digite o o código do ingresso: '))
-        evento = input('Digite o evento do ingresso: ')
-        return {'nome':nome,
-                'valor_do_ingresso': valor,
-                'codigo_do_ingresso':codigo,
-                'evento_do_ingresso': evento}
-
-    def evento_para_excluir_os_ingressos(self):
-        nome = str(input('Digite o nome do evnto que deseja exlcuir os ingressos:'))
-        return nome
-
-    def evento_para_listar_os_ingressos(self):
-        nome = str(input('Digite o nome do evento que deseja listar'))
-        return nome
-
-    def lista_ingressos(self,lista_de_ingressos):
-        lista = lista_de_ingressos
-        for ing in lista:
-            print(ing)
+    def close(self):
+        self.__window.Close()
