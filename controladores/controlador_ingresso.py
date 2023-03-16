@@ -1,56 +1,30 @@
 from entidades.ingresso import Ingresso
-from entidades.comprador import Comprador
 from telas.tela_ingresso import TelaIngresso
 
 
-class ContraladorIngressos:
-    def __init__(self):
-        self.__ingressos = []
+class ControladorIngresso:
+    def __init__(self, controlador_principal):
+        self.__controlador_principal = controlador_principal
         self.__tela_ingresso = TelaIngresso()
-        self.__codigo = 0
+        self.__ingressos = []
 
-    def adicionar_ingresso(self):
-        valor,lote,evento = self.__tela_ingresso.pegar_dados()
-        ingresso = Ingresso(valor, self.__codigo, evento)
-        self.__codigo+=1
-        try:
-            for i in self.__ingressos:
-                if ingresso.codigo == i.codigo:
-                    raise Exception
+    @property
+    def ingresso(self):
+        return self.__ingressos
 
-            else:
-                self.__ingressos.append(ingresso)
+    def gerar_ingressos(self, lotacao, evento, valor):
+        quantidade_de_ingressos = 0
+        ingressos_gerados = []
+        while quantidade_de_ingressos < int(lotacao):
+            ingresso_novo = Ingresso(valor, quantidade_de_ingressos, evento.nome)
+            ingressos_gerados.append(ingresso_novo)
+            quantidade_de_ingressos += 1
+        self.__ingressos.append(ingressos_gerados)
 
-        except Exception:
-            return None
-
-    def retorna_ingresso_pelo_codigo(self,codigo):
-        for ingresso in self.__ingressos:
-            if ingresso.codigo == codigo:
-                return ingresso
-
-    def alterar_ingresso(self):
-        nome,valor,codigo,evento = self.__tela_ingresso.alterar_ingresso()
-        ing = None
-        for ingresso in self.__ingressos:
-            if ingresso.evento == nome:
-                ing = ingresso
-        ing.valor = valor
-        ing.codigo = codigo
-        ing.evento = evento
-
-    def excluir_ingresso(self):
-        evento = self.__tela_ingresso.evento_para_excluir_os_ingressos()
-        for ing in self.__ingressos:
-            if ing.evento == evento:
-                self.__ingressos.remove(ing)
-
+        return ingressos_gerados
 
     def listar_ingressos(self):
-        nome = self.__tela_ingresso.evento_para_listar_os_ingressos()
-        lista = []
-        for ing in self.__ingressos:
-            if ing.evento == nome:
-                lista.append(ing)
-
-        self.__tela_ingresso.lista_ingressos(lista)
+        lista_ingressos = []
+        for ingresso in self.__controlador_principal.usuario_logado.meus_ingressos:
+            lista_ingressos.append([ingresso.evento, ingresso.codigo, ingresso.valor])
+        self.__tela_ingresso.mostrar_ingressos(lista_ingressos)
