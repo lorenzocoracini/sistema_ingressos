@@ -1,80 +1,20 @@
-import datetime
 import sys
-
 from controladores.controlador_comprador import ControladorComprador
 from controladores.controlador_evento import ControladorEvento
-from controladores.controlador_ingresso import ContraladorIngressos
+from controladores.controlador_ingresso import ControladorIngresso
 from controladores.controlador_produtor import ControladorProdutor
 from telas.tela_principal import TelaPrincipal
-from telas.tela_ingresso import TelaIngresso
+from exceptions.cpfNotFoundException import CpfNotFoundException
 
 
 class ControladorPrincipal:
     def __init__(self):
-        self.__tela_principal = TelaPrincipal(self)
-        self.__tela_ingresso = TelaIngresso()
-        self.__controlador_evento = ControladorEvento()
-        self.__controlador_ingressos = ContraladorIngressos()
-        self.__controlador_comprador = ControladorComprador(self)
-        self.__controlador_produtor = ControladorProdutor(self)
+        self.__controlador_ingressos = ControladorIngresso(self)
+        self.__controlador_evento = ControladorEvento(self.__controlador_ingressos)
+        self.__controlador_comprador = ControladorComprador(self, self.__controlador_evento, self.__controlador_ingressos)
+        self.__controlador_produtor = ControladorProdutor(self, self.__controlador_evento)
+        self.__tela_principal = TelaPrincipal()
         self.__usuario_logado = None
-        self.__eventos_disponiveis = []
-
-
-    def cadastro_novo_usuario(self):
-        dados = self.__tela_principal.mostra_tela_cadastro()
-        if dados["tipo_cadastro"] == 2:
-            for produtor in self.__controlador_produtor.produtores:
-                if produtor.cpf == dados["cpf"]:
-                    self.__tela_principal.cpf_em_uso()
-            else:
-                self.__usuario_logado = self.__controlador_produtor.inclui_produtor(dados["nome"], dados["cpf"],
-                                                      dados["email"], dados["celular"], dados["senha"])
-                self.__tela_principal.acao_realizada()
-                self.__controlador_produtor.escolher_acao()
-        elif dados["tipo_cadastro"] == 1:
-            for comprador in self.__controlador_comprador.compradores:
-                if comprador.cpf == dados["cpf"]:
-                    self.__tela_principal.cpf_em_uso()
-            else:
-                self.__usuario_logado = self.__controlador_comprador.inclui_comprador(dados["nome"], dados["cpf"],
-                                                          dados["email"], dados["celular"], dados["senha"])
-                self.__tela_principal.acao_realizada()
-                self.__controlador_comprador.escolher_acao()
-
-
-    def login(self):
-        dados_login = self.__tela_principal.mostrar_tela_login()
-        comprador = self.__controlador_comprador.retorna_comprador_e_senha_pelo_cpf(dados_login["cpf"])
-        produtor = self.__controlador_produtor.retorna_produtor_e_senha_pelo_cpf(dados_login["cpf"])
-        if comprador:
-            if dados_login["senha"] == comprador[1]:
-                self.__usuario_logado = comprador[0]
-                self.__tela_principal.acao_realizada()
-                self.__controlador_comprador.escolher_acao()
-            else:
-                self.__tela_principal.credenciais_incorretas()
-
-        elif produtor:
-            if dados_login["senha"] == produtor[1]:
-                self.__usuario_logado = produtor[0]
-                self.__tela_principal.acao_realizada()
-                self.__controlador_produtor.escolher_acao()
-            else:
-                self.__tela_principal.credenciais_incorretas()
-        else:
-            self.__tela_principal.nao_existe_conta()
-
-
-    def finaliza(self):
-        sys.exit()
-
-    def inicia(self):
-        opcoes = {1: self.cadastro_novo_usuario, 2: self.login, 0: self.finaliza}
-        while True:
-            opcao = self.__tela_principal.mostra_tela_inicial()
-            metodo_escolihido = opcoes[opcao]
-            metodo_escolihido()
 
     @property
     def usuario_logado(self):
@@ -84,27 +24,99 @@ class ControladorPrincipal:
     def usuario_logado(self, usuario_logado):
         self.__usuario_logado = usuario_logado
 
+    @property
+    def controlator_evento(self):
+        return self.__controlador_evento
+
+    @property
+    def controlador_ingressos(self):
+        return self.__controlador_ingressos
+
+    @property
+    def controlator_comprador(self):
+        return self.__controlador_comprador
+
+    @property
+    def controlator_produtor(self):
+        return self.__controlador_produtor
+
+    @property
+    def tela_principal(self):
+        return self.__tela_principal
+
+    def inicializa_sistema(self):
+        opcao = self.__tela_principal.escolher_login_ou_cadastro()
+        if opcao == "Login":
+            self.trata_login()
+        elif opcao == "Registre-se":
+            self.trata_cadastro()
+        else:
+            self.finaliza()
+
+    def trata_cadastro(self):
+        deu_certo = False
+        while not deu_certo:
+            button, values = self.__tela_principal.tela_cadastro()
+            if button == "Cancel":
+                deu_certo = True
+                self.inicializa_sistema()
+            elif button is None:
+                self.__tela_principal.mostra_mensagem("Os dados fornecidos estão incorretos, favor inserir novamente.")
+            else:
+                if button == 'Comprador':
+                    self.__controlador_comprador.inclui_comprador(values)
+
+                elif button == 'Produtor':
+                    self.__controlador_produtor.inclui_produtor(values)
+
+    def trata_login(self):
+        deu_certo = False
+
+        while not deu_certo:
+
+            button, values = self.__tela_principal.tela_login()
+
+            if button == 'Cancel':
+                deu_certo = True
+                self.inicializa_sistema()
+            elif button is None and values is None:
+                self.__tela_principal.mostra_mensagem("Os dados fornecidos estão incorretos, favor inserir novamente.")
+            else:
+                try:
+                    comprador = self.__controlador_comprador.retorna_comprador_pelo_cpf(values['input_cpf'])
+                    produtor = self.__controlador_produtor.retorna_produtor_pelo_cpf(values['input_cpf'])
+
+                    if comprador:
+                        if values['input_senha'] == comprador.senha:
+                            self.__usuario_logado = comprador
+                            deu_certo = True
+                            self.__usuario_logado = comprador
+                            self.__controlador_comprador.mostrar_opcoes_comprador()
+
+                        else:
+                            self.__tela_principal.mostra_mensagem(
+                                "A senha cadastrada não confere com o cpf inserido. Tente Novamente.")
+
+                    elif produtor:
+                        if values['input_senha'] == produtor.senha:
+                            self.__usuario_logado = produtor
+                            deu_certo = True
+                            self.__usuario_logado = produtor
+                            self.__controlador_produtor.mostrar_opcoes_produtor()
+                        else:
+                            self.__tela_principal.mostra_mensagem(
+                                "A senha cadastrada não confere com o cpf inserido. Tente Novamente.")
+                    else:
+                        raise CpfNotFoundException()
+                except CpfNotFoundException:
+                    self.__tela_principal.mostra_mensagem("Não existe uma conta cadastrada com esse cpf.")
+
+
+    def altera_usuario_logado(self, usuario):
+        self.__usuario_logado = usuario
+
     def deslogar(self):
         self.__usuario_logado = None
 
-    @property
-    def eventos_disponiveis(self):
-        return self.__eventos_disponiveis
-
-    @eventos_disponiveis.setter
-    def eventos_disponiveis(self, evento):
-        self.__eventos_disponiveis = evento
-
-    def atualizar_eventos_disponiveis(self):
-        self.__eventos_disponiveis = []
-        for evento in self.__controlador_produtor.eventos:
-            if evento.data.date() >= datetime.datetime.today().date():
-                self.__eventos_disponiveis.append(evento)
-
-    def verificar_data(self, dia, mes, ano):
-        esta_correta = True
-        try:
-            datetime.datetime(ano,mes,dia)
-        except ValueError:
-            esta_correta = False
-        return esta_correta
+    def finaliza(self):
+        sys.exit()
